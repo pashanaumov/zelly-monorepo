@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "zelly-web": "apps/zelly-web",
+    "zelly-web-e2e": "apps/zelly-web-e2e"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "root": "apps/zelly-web",
+  "sourceRoot": "apps/zelly-web/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/zelly-web",
+        "index": "apps/zelly-web/src/index.html",
+        "baseHref": "/",
+        "main": "apps/zelly-web/src/main.tsx",
+        "polyfills": "apps/zelly-web/src/polyfills.ts",
+        "tsConfig": "apps/zelly-web/tsconfig.app.json",
+        "assets": [
+          "apps/zelly-web/src/favicon.ico",
+          "apps/zelly-web/src/assets"
+        ],
+        "styles": ["apps/zelly-web/src/styles.scss"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/zelly-web/src/environments/environment.ts",
+              "with": "apps/zelly-web/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "zelly-web:build",
+        "hmr": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "zelly-web:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/zelly-web/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/zelly-web"],
+      "options": {
+        "jestConfig": "apps/zelly-web/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
