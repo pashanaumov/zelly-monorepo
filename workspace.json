@@ -1,6 +1,10 @@
 {
   "version": 2,
   "projects": {
+    "core": "libs/core",
+    "shared-ui-layout": "libs/shared-ui-layout",
+    "zelly-mobile": "apps/zelly-mobile",
+    "zelly-mobile-e2e": "apps/zelly-mobile-e2e",
     "zelly-web": "apps/zelly-web",
     "zelly-web-e2e": "apps/zelly-web-e2e"
   }

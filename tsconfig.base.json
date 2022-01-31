@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@zelly/core/*": ["libs/core/src/*"],
+      "@zelly/shared-ui-layout/*": ["libs/shared-ui-layout/src/*"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
