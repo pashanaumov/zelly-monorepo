@@ -16,7 +16,11 @@
     "**/*.spec.js",
     "**/*.test.js",
     "**/*.spec.jsx",
-    "**/*.test.jsx"
+    "**/*.test.jsx",
+    "**/*.native.tsx",
+    "**/*.native.ts",
+    "**/*.ios.tsx",
+    "**/*.android.tsx"
   ],
   "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"]
 }

@@ -1,13 +1,19 @@
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { store } from '@zelly/shared-ui-layout/redux/store';
+import { BrowserRouter } from 'react-router-dom';
+import { store, persistor } from '@zelly/core/redux/storeWeb';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import App from './app/app';
 
 const MainApp = () => (
   <Provider store={store}>
-    <App />
+    <PersistGate persistor={persistor}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </PersistGate>
   </Provider>
 );
 

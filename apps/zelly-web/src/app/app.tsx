@@ -2,14 +2,16 @@
 import styles from './app.module.scss';
 import NxWelcome from './nx-welcome';
 import { Naumov } from '@zelly/shared-ui-layout/index';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, useStore } from 'react-redux';
 import { RootState } from '@zelly/shared-ui-layout/redux/store';
 import { increment } from '@zelly/shared-ui-layout/redux/rootSlice';
 import '../styles.scss';
 
 export function App() {
-  const count = useSelector((state: RootState) => state.counter.value);
-  const dispatch = useDispatch();
+  const state = useStore().getState();
+
+  console.log(state);
+
   return (
     <>
       <div className="bg-gray-50">
