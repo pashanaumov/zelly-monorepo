@@ -9,7 +9,7 @@ import {
   StatusBar,
   TouchableOpacity,
 } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, useStore } from 'react-redux';
 import { RootState } from '@zelly/shared-ui-layout/redux/store';
 import { increment } from '@zelly/shared-ui-layout/redux/rootSlice';
 
@@ -34,13 +34,6 @@ const App = () => {
   const [whatsNextYCoord, setWhatsNextYCoord] = useState<number>(0);
   const scrollViewRef = useRef<null | ScrollView>(null);
 
-  const count = useSelector((state: RootState) => state.counter.value);
-  const dispatch = useDispatch();
-
-  function increase() {
-    dispatch(increment());
-  }
-
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -57,7 +50,6 @@ const App = () => {
             <Text style={[styles.textXL, styles.appTitleText]} testID="heading">
               Welcome {Naumov.name} 👋
             </Text>
-            <Text style={styles.textLg}>Your counter {count}</Text>
           </View>
           <View style={styles.section}>
             <View style={styles.hero}>
@@ -84,10 +76,7 @@ const App = () => {
                   What's next?
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.whatsNextButton}
-                onPress={increase}
-              >
+              <TouchableOpacity style={styles.whatsNextButton}>
                 <Text style={[styles.textMd, styles.textCenter]}>
                   Click this
                 </Text>

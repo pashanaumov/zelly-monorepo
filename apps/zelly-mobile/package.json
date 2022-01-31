@@ -10,6 +10,13 @@
     "react-native-config": "*",
     "react-native-svg": "*",
     "@reduxjs/toolkit": "*",
-    "react-redux": "*"
+    "react-redux": "*",
+    "react-native-paper": "*",
+    "@react-navigation/native": "*",
+    "@react-native-async-storage/async-storage": "*",
+    "react-native-toast-message": "*",
+    "redux-saga": "*",
+    "redux-persist": "*",
+    "axios": "*"
   }
 }
