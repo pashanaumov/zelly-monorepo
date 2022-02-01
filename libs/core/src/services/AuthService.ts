@@ -3,8 +3,8 @@ import { UserEmail, UserPassword } from '../types/Utility/User';
 import { RegisterRequestBody, UserResponse } from '../types/Auth/LoginResponse';
 import { useApi } from './useApiService';
 
-const loginUrl = `http://localhost:3000/auth/login`;
-const registerUrl = `http://localhost:3000/auth/register`;
+const loginUrl = `http://192.168.1.68:3000/auth/login`;
+const registerUrl = `http://192.168.1.68:3000/auth/register`;
 
 export function useAuthService() {
   const { setItem, removeItem } = useAsyncStorage('user');

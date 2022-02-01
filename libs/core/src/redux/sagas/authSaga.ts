@@ -19,7 +19,10 @@ function* loginUser(payload: LoginUserPayload) {
   const { login } = useAuthService();
   yield put(toggleLoading(true));
   try {
+    console.log('am i here?');
+    
     const user: UserResponse = yield call(() => login(email, password));
+    console.log(user);
     if (user.token) {
       yield put(authUser(user.token));
       yield put(setUser({ user }));

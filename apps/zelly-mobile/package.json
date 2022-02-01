@@ -15,8 +15,14 @@
     "@react-navigation/native": "*",
     "@react-native-async-storage/async-storage": "*",
     "react-native-toast-message": "*",
+    "react-native-safe-area-context": "*",
     "redux-saga": "*",
     "redux-persist": "*",
-    "axios": "*"
+    "axios": "*",
+    "react-native-screens": "*",
+    "@react-navigation/native-stack": "*",
+    "formik": "*",
+    "react-native-modal": "*",
+    "@react-native-picker/picker": "*"
   }
 }
