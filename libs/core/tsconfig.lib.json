@@ -4,6 +4,6 @@
     "outDir": "../../dist/out-tsc",
     "types": ["node"]
   },
-  "exclude": ["**/*.spec.ts", "**/*.spec.tsx", "test-setup.ts"],
-  "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"]
+  "exclude": ["**/*.spec.ts", "**/*.spec.tsx", "test-setup.ts",],
+  "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx", "**/*.web.js", "**/*.web.jsx", "**/*.web.ts", "**/*.web.tsx", "**/*.native.js", "**/*.native.jsx", "**/*.native.ts", "**/*.native.tsx"]
 }

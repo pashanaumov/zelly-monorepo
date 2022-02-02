@@ -7,6 +7,7 @@ import { authUser } from '../authSlice';
 import { toggleLoading } from '../ui/uiSlice';
 import { setUser } from '../userSlice';
 import { sagaActions } from './sagaActions';
+import Toast from '../../components/Toast';
 
 export type LoginUserPayload = {
   type: keyof typeof sagaActions;
@@ -19,8 +20,6 @@ function* loginUser(payload: LoginUserPayload) {
   const { login } = useAuthService();
   yield put(toggleLoading(true));
   try {
-    console.log('am i here?');
-    
     const user: UserResponse = yield call(() => login(email, password));
     console.log(user);
     if (user.token) {
@@ -31,10 +30,12 @@ function* loginUser(payload: LoginUserPayload) {
   } catch (e: any) {
     yield put(toggleLoading(false));
 
-    if (Platform.OS !== 'web') {
-      // @TODO: CHANGE
-      // Toast.showToast("error", "Error", e.message || "");
-    }
+    Toast.showToast({
+      type: 'error',
+      text1: 'Error',
+      text2: e.message || '',
+    });
+
     console.log(e.message);
   }
 }
