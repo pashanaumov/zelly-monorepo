@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import {useSelector} from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import { runFetchData } from '@zelly/core/redux/sagas/authSaga';
-import { AppDispatch } from '@zelly/core/redux/storeWeb';
+import { AppDispatch, RootState } from '@zelly/core/redux/storeWeb';
 import { UserEmail, UserPassword } from '@zelly/core/types/Utility/User';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 
 export const LoginScreen = () => {
   const dispatch = useDispatch<AppDispatch>();
+
+  const isAuthenticated = useSelector((state: RootState) => state.auth.authenticated);
 
   async function onLogin({
     email,
@@ -27,6 +31,10 @@ export const LoginScreen = () => {
       await onLogin({ ...values });
     },
   });
+
+  if(isAuthenticated) {
+    return <Navigate to={'/'} />
+  }
 
   return (
     <div className="lg:flex">

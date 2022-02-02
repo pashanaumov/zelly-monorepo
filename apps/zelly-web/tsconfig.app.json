@@ -22,5 +22,18 @@
     "**/*.ios.tsx",
     "**/*.android.tsx"
   ],
-  "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"]
+  "include": [
+    "**/*.js",
+    "**/*.jsx",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.web.js",
+    "**/*.web.jsx",
+    "**/*.web.ts",
+    "**/*.web.tsx",
+    "**/*.native.js",
+    "**/*.native.jsx",
+    "**/*.native.ts",
+    "**/*.native.tsx"
+  ]
 }

@@ -23,6 +23,7 @@
     "@react-navigation/native-stack": "*",
     "formik": "*",
     "react-native-modal": "*",
-    "@react-native-picker/picker": "*"
+    "@react-native-picker/picker": "*",
+    "react-toastify": "*"
   }
 }

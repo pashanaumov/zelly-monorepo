@@ -1,17 +1,17 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { RootState } from '@zelly/core/redux/storeWeb';
 import { MainHeader } from './MainHeader';
-import { Link } from 'react-router-dom';
 
 export const MainContent: FC = () => {
   const user = useSelector((state: RootState) => state.user.user);
 
   if (!user) {
     return (
-      <>
+   
         <Link to="/login">Login</Link>
-      </>
+    
     );
   }
 
@@ -28,23 +28,21 @@ export const MainContent: FC = () => {
               Country: {user.country}
             </span>
             <span className="block text-indigo-600">
-              Language: ta{user.language}
+              Language: {user.language}
             </span>
           </h2>
           <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
             <div className="inline-flex rounded-md shadow">
               <a
                 href="#"
-                className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
-              >
+                className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
                 Get started
               </a>
             </div>
             <div className="ml-3 inline-flex rounded-md shadow">
               <a
                 href="#"
-                className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50"
-              >
+                className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50">
                 Learn more
               </a>
             </div>

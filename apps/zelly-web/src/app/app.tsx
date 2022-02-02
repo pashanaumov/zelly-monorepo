@@ -2,14 +2,9 @@
 import '../styles.scss';
 import { withAuth } from './components/hoc/withAuth';
 import { MainAppRouter } from './screens/Main/MainAppRoutes';
-import { MainHeader } from './screens/Main/MainHeader';
 
 export function App() {
-  return (
-    <>
-      <MainAppRouter />
-    </>
-  );
+  return <MainAppRouter />;
 }
 
 export default withAuth(App);

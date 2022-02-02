@@ -1,5 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 import { BrowserRouter } from 'react-router-dom';
 import { store, persistor } from '@zelly/core/redux/storeWeb';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -10,6 +11,7 @@ export const AppWrapper = () => (
     <PersistGate persistor={persistor}>
       <BrowserRouter>
         <App />
+      <ToastContainer />
       </BrowserRouter>
     </PersistGate>
   </Provider>
