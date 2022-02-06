@@ -4,7 +4,11 @@ import { withAuth } from './components/hoc/withAuth';
 import { MainAppRouter } from './screens/Main/MainAppRoutes';
 
 export function App() {
-  return <MainAppRouter />;
+  return (
+    <div className="container">
+      <MainAppRouter />
+    </div>
+  );
 }
 
 export default withAuth(App);

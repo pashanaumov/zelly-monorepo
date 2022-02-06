@@ -1,16 +1,18 @@
-import React, { useEffect } from 'react';
-import {useSelector} from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import React from 'react';
 import { runFetchData } from '@zelly/core/redux/sagas/authSaga';
 import { AppDispatch, RootState } from '@zelly/core/redux/storeWeb';
 import { UserEmail, UserPassword } from '@zelly/core/types/Utility/User';
-import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export const LoginScreen = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const isAuthenticated = useSelector((state: RootState) => state.auth.authenticated);
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.authenticated,
+  );
 
   async function onLogin({
     email,
@@ -32,8 +34,8 @@ export const LoginScreen = () => {
     },
   });
 
-  if(isAuthenticated) {
-    return <Navigate to={'/'} />
+  if (isAuthenticated) {
+    return <Navigate to={'/'} />;
   }
 
   return (
@@ -51,8 +53,7 @@ export const LoginScreen = () => {
                 x="0px"
                 y="0px"
                 viewBox="0 0 225 225"
-                xmlSpace="preserve"
-              >
+                xmlSpace="preserve">
                 <style
                   type="text/css"
                   dangerouslySetInnerHTML={{
@@ -79,8 +80,7 @@ export const LoginScreen = () => {
         <div className="mt-10 px-12 sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl">
           <h2
             className="text-center text-4xl text-emerald-900 font-display font-semibold lg:text-left xl:text-5xl
-                        xl:text-bold"
-          >
+                        xl:text-bold">
             Log in
           </h2>
           <div className="mt-12">
@@ -88,8 +88,7 @@ export const LoginScreen = () => {
               <div>
                 <label
                   htmlFor="email"
-                  className="text-sm font-bold text-gray-700 tracking-wide"
-                >
+                  className="text-sm font-bold text-gray-700 tracking-wide">
                   Email Address
                 </label>
                 <input
@@ -106,15 +105,13 @@ export const LoginScreen = () => {
                 <div className="flex justify-between items-center">
                   <label
                     htmlFor="password"
-                    className="text-sm font-bold text-gray-700 tracking-wide"
-                  >
+                    className="text-sm font-bold text-gray-700 tracking-wide">
                     Password
                   </label>
                   <div>
                     <a
                       className="text-xs font-display font-semibold text-emerald-600 hover:text-emerald-800
-                                            cursor-pointer"
-                    >
+                                            cursor-pointer">
                       Forgot Password?
                     </a>
                   </div>
@@ -134,17 +131,18 @@ export const LoginScreen = () => {
                   type="submit"
                   className="bg-emerald-500 text-gray-100 p-4 w-full rounded-full tracking-wide
                                     font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-emerald-600
-                                    shadow-lg"
-                >
+                                    shadow-lg">
                   Log In
                 </button>
               </div>
             </form>
             <div className="mt-12 text-sm font-display font-semibold text-gray-700 text-center">
               Don't have an account ?{' '}
-              <a className="cursor-pointer text-emerald-600 hover:text-emerald-800">
-                Sign up
-              </a>
+              <Link to="/register">
+                <a className="cursor-pointer text-emerald-600 hover:text-emerald-800">
+                  Sign up
+                </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -156,8 +154,7 @@ export const LoginScreen = () => {
             xmlns="http://www.w3.org/2000/svg"
             id="f080dbb7-9b2b-439b-a118-60b91c514f72"
             data-name="Layer 1"
-            viewBox="0 0 528.71721 699.76785"
-          >
+            viewBox="0 0 528.71721 699.76785">
             <title>Login</title>
             <rect y="17.06342" width={444} height={657} fill="#535461" />
             <polygon

@@ -10,7 +10,10 @@ export const withAuth =
     const navigate = useNavigate();
 
     const userToken = useSelector(
-      (state: RootState) => state.auth.authenticated
+      (state: RootState) => state.auth.authenticated,
+    );
+    const fetchedToken = useSelector(
+      (state: RootState) => state.user.user?.token,
     );
 
     const isAtRouteToRedirect =
@@ -28,7 +31,7 @@ export const withAuth =
 
     useEffect(() => {
       shouldNavigateAway();
-    }, [shouldNavigateAway, userToken]);
+    }, [shouldNavigateAway, userToken, fetchedToken]);
 
     return <Component {...(props as P)} />;
   };

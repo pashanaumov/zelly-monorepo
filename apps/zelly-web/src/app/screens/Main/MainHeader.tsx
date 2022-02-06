@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { sagaActions } from '@zelly/core/redux/sagas/sagaActions';
 
 const navigation = [
