@@ -1,6 +1,6 @@
-import { FC, Fragment, PropsWithChildren } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
+import { Fragment, PropsWithChildren } from 'react';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
