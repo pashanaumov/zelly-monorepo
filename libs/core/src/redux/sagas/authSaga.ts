@@ -1,5 +1,5 @@
-import { Platform } from 'react-native';
 import { all, call, put, takeEvery } from 'redux-saga/effects';
+import Toast from '../../components/Toast';
 import { useAuthService } from '../../services/AuthService';
 import { UserResponse } from '../../types/Auth/LoginResponse';
 import { UserEmail, UserPassword } from '../../types/Utility/User';
@@ -7,7 +7,6 @@ import { authUser } from '../authSlice';
 import { toggleLoading } from '../ui/uiSlice';
 import { setUser } from '../userSlice';
 import { sagaActions } from './sagaActions';
-import Toast from '../../components/Toast';
 
 export type LoginUserPayload = {
   type: keyof typeof sagaActions;
@@ -57,6 +56,8 @@ export function runFetchData(payload: {
   email: UserEmail;
   password: UserPassword;
 }) {
+  console.log({ email: payload.email, password: payload.password });
+
   return {
     type: sagaActions.LOGIN_USER,
     email: payload.email,

@@ -53,6 +53,13 @@
 			name = ZellyMobile;
 			sourceTree = "<group>";
 		};
+		1B7DAA21B1D54600AE899CB6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +84,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				CC467A8CA32BFDD637A07875 /* Pods */,
+				1B7DAA21B1D54600AE899CB6 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -280,6 +288,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D24FR623VX;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ZellyMobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -306,6 +315,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D24FR623VX;
 				INFOPLIST_FILE = ZellyMobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

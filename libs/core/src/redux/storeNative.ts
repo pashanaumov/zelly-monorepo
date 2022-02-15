@@ -1,6 +1,6 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import createSagaMiddleware from "redux-saga";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import createSagaMiddleware from 'redux-saga';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   persistStore,
   persistReducer,
@@ -10,17 +10,18 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from "redux-persist";
+} from 'redux-persist';
 
-import authReducer from "./authSlice";
-import userReducer from "./userSlice";
-import uiReducer from "./ui/uiSlice";
+import authReducer from './authSlice';
+import userReducer from './userSlice';
+import uiReducer from './ui/uiSlice';
 
-import rootSaga from "./sagas/rootSaga";
+import rootSaga from './sagas/rootSaga';
 
 const persistConfig = {
-  key: "root",
+  key: 'root',
   storage: AsyncStorage,
+  blacklist: ['ui'],
 };
 
 const sagaMiddleware = createSagaMiddleware();

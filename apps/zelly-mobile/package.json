@@ -21,9 +21,15 @@
     "axios": "*",
     "react-native-screens": "*",
     "@react-navigation/native-stack": "*",
+    "@react-navigation/bottom-tabs'": "*",
     "formik": "*",
     "react-native-modal": "*",
     "@react-native-picker/picker": "*",
-    "react-toastify": "*"
+    "react-toastify": "*",
+    "react-native-gesture-handler": "*",
+    "firebase": "*",
+    "react-native-vector-icons": "*",
+    "@react-navigation/bottom-tabs": "*",
+    "react-native-parallax-header": "*"
   }
 }

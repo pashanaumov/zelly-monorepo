@@ -1,18 +1,51 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RootState } from '@zelly/core/redux/storeWeb';
 import { MainHeader } from './MainHeader';
+import db from '@zelly/core/firebase.config';
+
+interface User {
+  age: number;
+  jobTitle: string;
+  name: string;
+  userId: number;
+}
 
 export const MainContent: FC = () => {
   const user = useSelector((state: RootState) => state.user.user);
 
+  const [users, setUsers] = useState<User[]>([]);
+
+  async function fetchUsers() {
+    const response = db.collection('users');
+    const data = await response.get();
+    data.docs.forEach((snapshot) => {
+      setUsers((prevUsers) => [...prevUsers, snapshot.data() as User]);
+    });
+  }
+
+  const kate: User = {
+    name: 'Kate',
+    age: 22,
+    jobTitle: 'Banker',
+    userId: 22,
+  };
+
+  async function addUser() {
+    await db.collection('users').add(kate);
+  }
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  useEffect(() => {
+    console.log(users);
+  }, [users]);
+
   if (!user) {
-    return (
-   
-        <Link to="/login">Login</Link>
-    
-    );
+    return <Link to="/login">Login</Link>;
   }
 
   return (
@@ -32,7 +65,9 @@ export const MainContent: FC = () => {
             </span>
           </h2>
           <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
-            <div className="inline-flex rounded-md shadow">
+            <div
+              className="inline-flex rounded-md shadow"
+              onClick={() => alert('fick')}>
               <a
                 href="#"
                 className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
@@ -50,17 +85,5 @@ export const MainContent: FC = () => {
         </div>
       </div>
     </>
-    // <div
-    //   style={{
-    //     padding: 8,
-    //     border: '1px solid black',
-    //     width: '300px',
-    //   }}
-    // >
-    //   <p>Email: {user.email}</p>
-    //   <p>UserId: {user.id}</p>
-    //   <p>Country: {user.country}</p>
-    //   <p>Preferred language: {user.language}</p>
-    // </div>
   );
 };
