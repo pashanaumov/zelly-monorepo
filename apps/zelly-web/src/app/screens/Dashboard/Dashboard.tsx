@@ -60,20 +60,6 @@ const actions = [
     iconForeground: 'text-yellow-700',
     iconBackground: 'bg-yellow-50',
   },
-  //   {
-  //     icon: ReceiptRefundIcon,
-  //     name: 'Submit an expense',
-  //     href: '#',
-  //     iconForeground: 'text-rose-700',
-  //     iconBackground: 'bg-rose-50',
-  //   },
-  //   {
-  //     icon: AcademicCapIcon,
-  //     name: 'Training',
-  //     href: '#',
-  //     iconForeground: 'text-indigo-700',
-  //     iconBackground: 'bg-indigo-50',
-  //   },
 ];
 const recentHires = [
   {
