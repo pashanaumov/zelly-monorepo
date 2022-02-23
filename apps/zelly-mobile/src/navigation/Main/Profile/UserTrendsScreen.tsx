@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import { SectionHeading } from '../../../components/Common/SectionHeading';
 
 export const UserTrendsScreen = () => {
   return (
     <View>
-      <Text>UserTrendsScreen</Text>
+      <SectionHeading sectionTitle={'User Trends'} />
     </View>
   );
 };

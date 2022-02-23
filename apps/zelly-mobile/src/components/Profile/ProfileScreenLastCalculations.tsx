@@ -61,6 +61,7 @@ export const ProfileScreenLastCalculations = () => {
       <Button
         style={styles.showAllButton}
         mode="text"
+        // @ts-ignore
         onPress={() => navigation.navigate('UserCarbonFootprint')}>
         Показать все
       </Button>

@@ -5,6 +5,7 @@ import { ProfileScreenInfoColumns } from '../../../components/Profile/ProfileScr
 import { ProfileScreenLastCalculations } from '../../../components/Profile/ProfileScreenLastCalculations';
 import { ProfileScreenUserCompanies } from '../../../components/Profile/ProfileScreenUserCompanies';
 import { ProfileScreenActions } from '../../../components/Profile/ProfileScreenActions';
+import { ProfileLogoutButton } from '../../../components/Profile/ProfileLogoutButton';
 
 export const ProfileScreen: FC = () => {
   return (
@@ -14,6 +15,7 @@ export const ProfileScreen: FC = () => {
       <ProfileScreenActions />
       <ProfileScreenLastCalculations />
       <ProfileScreenUserCompanies />
+      <ProfileLogoutButton />
     </ScrollView>
   );
 };

@@ -3,15 +3,29 @@ import { View, StyleSheet, Text } from 'react-native';
 import { TextInput as Input } from 'react-native-paper';
 import { theme } from '../../ui/theme';
 
-type Props = React.ComponentProps<typeof Input> & { errorText?: string };
+type Props = React.ComponentProps<typeof Input> & {
+  errorText?: string;
+  withPasswordEye?: boolean;
+  secureInputAction?: () => void;
+};
 
-const TextInput = ({ errorText, ...props }: Props) => (
+const TextInput = ({
+  errorText,
+  withPasswordEye,
+  secureInputAction,
+  ...props
+}: Props) => (
   <View style={styles.container}>
     <Input
       style={styles.input}
       selectionColor={theme.colors.primary}
       underlineColor="transparent"
       mode="outlined"
+      right={
+        withPasswordEye ? (
+          <Input.Icon onPress={secureInputAction} name="eye" />
+        ) : null
+      }
       {...props}
     />
     {errorText ? <Text style={styles.error}>{errorText}</Text> : null}

@@ -45,6 +45,7 @@ export const ProfileScreenUserCompanies = () => {
       <Button
         style={styles.showAllButton}
         mode="text"
+        // @ts-ignore
         onPress={() => navigation.navigate('UserCompanies')}>
         Показать все
       </Button>

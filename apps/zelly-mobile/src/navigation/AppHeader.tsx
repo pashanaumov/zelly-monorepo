@@ -1,11 +1,11 @@
 import React from 'react';
 import { Appbar } from 'react-native-paper';
 import { ParamListBase } from '@react-navigation/native';
-import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs/lib/typescript/src/types';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 interface Props {
   back?: boolean;
-  navigation: BottomTabNavigationProp<ParamListBase>;
+  navigation: NativeStackNavigationProp<ParamListBase>;
 }
 
 export function AppHeader({ back, navigation }: Props) {

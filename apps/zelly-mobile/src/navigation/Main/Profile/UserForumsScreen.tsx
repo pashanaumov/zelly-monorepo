@@ -1,10 +1,11 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import { SectionHeading } from '../../../components/Common/SectionHeading';
 
 export const UserForumsScreen = () => {
   return (
     <View>
-      <Text>UserForumsScreen</Text>
+      <SectionHeading sectionTitle={'Forums'} />
     </View>
   );
 };

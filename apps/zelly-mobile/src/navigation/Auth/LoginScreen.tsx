@@ -2,16 +2,16 @@ import React, { memo, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
+import { AppDispatch } from '@zelly/core/redux/storeNative';
+import { runFetchData } from '@zelly/core/redux/sagas/authSaga';
+import { UserEmail, UserPassword } from '@zelly/core/types/Utility/User';
+import { AuthStackNavigation } from '../AppNavigator';
 import Background from '../../components/Common/Background';
 import Logo from '../../components/Common/Logo';
 import Header from '../../components/Common/Header';
 import Button from '../../components/Common/Button/Button';
 import TextInput from '../../components/Common/TextInput';
 import { theme } from '../../ui/theme';
-import { AuthStackNavigation } from '../AppNavigator';
-import { AppDispatch } from '@zelly/core/redux/storeNative';
-import { runFetchData } from '@zelly/core/redux/sagas/authSaga';
-import { UserEmail, UserPassword } from '@zelly/core/types/Utility/User';
 import { emailValidator, passwordValidator } from '../../ui/utils';
 
 type Props = AuthStackNavigation<'Login'>;
@@ -20,6 +20,12 @@ const LoginScreen = ({ navigation }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
   const [_email, setEmail] = useState({ error: '' });
   const [_password, setPassword] = useState({ error: '' });
+
+  const [isSecureInput, setIsSecureInput] = useState<boolean>(true);
+
+  function toggleSecureInput() {
+    setIsSecureInput((isSecure) => !isSecure);
+  }
 
   const _onLoginPressed = (
     email: string,
@@ -79,6 +85,7 @@ const LoginScreen = ({ navigation }: Props) => {
         autoCapitalize="none"
         textContentType="emailAddress"
         keyboardType="email-address"
+        autoCorrect={false}
       />
 
       <TextInput
@@ -87,8 +94,10 @@ const LoginScreen = ({ navigation }: Props) => {
         label="Password"
         returnKeyType="done"
         value={password}
-        secureTextEntry
+        secureTextEntry={isSecureInput}
         onChangeText={handleChange('password')}
+        withPasswordEye={true}
+        secureInputAction={toggleSecureInput}
       />
 
       <View style={styles.forgotPassword}>

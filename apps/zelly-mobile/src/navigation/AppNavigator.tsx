@@ -19,6 +19,7 @@ import { UserCompaniesScreen } from './Main/Profile/UserCompaniesScreen';
 import { UserTrendsScreen } from './Main/Profile/UserTrendsScreen';
 import { UserForumsScreen } from './Main/Profile/UserForumsScreen';
 import { UserEducationScreen } from './Main/Profile/UserEducationScreen';
+import { FootprintCalculator } from './Main/Calculator/FootprintCalculator';
 
 enableScreens();
 
@@ -80,8 +81,11 @@ function MainStack() {
     <MainStackNav.Navigator
       initialRouteName="HomeScreen"
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
         gestureEnabled: true,
+        header: (props) => {
+          return <AppHeader {...props} back={false} />;
+        },
       }}>
       <MainStackNav.Screen name={'HomeScreen'} component={MainScreen} />
     </MainStackNav.Navigator>
@@ -120,6 +124,10 @@ function ProfileStack() {
         name="UserEducation"
         component={UserEducationScreen}
       />
+      <ProfileStackNav.Screen
+        name={'Calculator'}
+        component={FootprintCalculator}
+      />
     </ProfileStackNav.Navigator>
   );
 }
@@ -143,7 +151,13 @@ function MainTabs() {
         tabBarActiveTintColor: 'rgb(96, 38, 232)',
         tabBarInactiveTintColor: 'gray',
       })}>
-      <Tab.Screen name="Home" component={MainStack} />
+      <Tab.Screen
+        name="Home"
+        options={{
+          headerShown: false,
+        }}
+        component={MainStack}
+      />
       <Tab.Screen
         name="Profile"
         options={{
