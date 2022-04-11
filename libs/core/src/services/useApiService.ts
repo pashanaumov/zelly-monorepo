@@ -7,7 +7,7 @@ import {
   Url,
 } from "../types/Utility/Http";
 
-export function useApi() {
+export function apiService() {
   const { getItem } = useAsyncStorage("user");
 
   const defaultHeaders: AxiosRequestHeaders = {

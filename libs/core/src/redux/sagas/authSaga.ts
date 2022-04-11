@@ -20,7 +20,7 @@ function* loginUser(payload: LoginUserPayload) {
   yield put(toggleLoading(true));
   try {
     const user: UserResponse = yield call(() => login(email, password));
-    console.log(user);
+
     if (user.token) {
       yield put(authUser(user.token));
       yield put(setUser({ user }));
@@ -56,8 +56,6 @@ export function runFetchData(payload: {
   email: UserEmail;
   password: UserPassword;
 }) {
-  console.log({ email: payload.email, password: payload.password });
-
   return {
     type: sagaActions.LOGIN_USER,
     email: payload.email,
