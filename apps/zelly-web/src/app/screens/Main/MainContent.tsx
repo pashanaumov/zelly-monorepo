@@ -40,10 +40,6 @@ export const MainContent: FC = () => {
     fetchUsers();
   }, []);
 
-  useEffect(() => {
-    console.log(users);
-  }, [users]);
-
   if (!user) {
     return <Link to="/login">Login</Link>;
   }
