@@ -11,7 +11,7 @@ export const AppWrapper = () => (
     <PersistGate persistor={persistor}>
       <BrowserRouter>
         <App />
-      <ToastContainer />
+        <ToastContainer />
       </BrowserRouter>
     </PersistGate>
   </Provider>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { LoginScreen } from '../Auth/Login';
 import { RegisterScreen } from '../Auth/Register';
+import { Companies } from '../Companies/Companies';
 import { Dashboard } from '../Dashboard/Dashboard';
 import { DashboardMain } from '../Dashboard/DashboardMain';
 import { Settings } from '../Settings/Settings';
@@ -25,5 +26,6 @@ export const MainAppRouter = () => (
       <Route path="about" element={<About />} />
     </Route>
     <Route path="settings" element={<Settings />} />
+    <Route path="companies" element={<Companies />} />
   </Routes>
 );

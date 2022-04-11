@@ -15,38 +15,12 @@ interface User {
 export const MainContent: FC = () => {
   const user = useSelector((state: RootState) => state.user.user);
 
-  const [users, setUsers] = useState<User[]>([]);
-
-  async function fetchUsers() {
-    const response = db.collection('users');
-    const data = await response.get();
-    data.docs.forEach((snapshot) => {
-      setUsers((prevUsers) => [...prevUsers, snapshot.data() as User]);
-    });
-  }
-
-  const kate: User = {
-    name: 'Kate',
-    age: 22,
-    jobTitle: 'Banker',
-    userId: 22,
-  };
-
-  async function addUser() {
-    await db.collection('users').add(kate);
-  }
-
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
   if (!user) {
     return <Link to="/login">Login</Link>;
   }
 
   return (
     <>
-      <MainHeader />
       <div className="bg-gray-50">
         <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
           <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">

@@ -4,8 +4,8 @@ import {
   InformationCircleIcon,
   TrendingUpIcon,
 } from '@heroicons/react/outline';
-import { useUserInfo } from '@zelly/core/hooks/useUserInfo';
 import React from 'react';
+import { useUserInfo } from '@zelly/core/hooks/useUserInfo';
 import { Link } from 'react-router-dom';
 import { Avatar } from '../../components/common/Avatar/Avatar';
 
@@ -29,8 +29,8 @@ const actions = [
   },
   {
     icon: TrendingUpIcon,
-    name: 'Посмотреть тренды пользователей',
-    href: '#',
+    name: 'Посмотреть список компаний',
+    href: '/companies',
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50',
   },
@@ -105,7 +105,7 @@ const announcements = [
 ];
 
 export const DashboardMain = () => {
-  const { country, language, email, username } = useUserInfo();
+  const { username } = useUserInfo();
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
       <h1 className="sr-only">Profile</h1>
@@ -139,13 +139,6 @@ export const DashboardMain = () => {
                       </p>
                     </div>
                   </div>
-                  {/* <div className="mt-5 flex justify-center sm:mt-0">
-                        <a
-                          href="#"
-                          className="flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                          View profile
-                        </a>
-                      </div> */}
                 </div>
               </div>
               <div className="border-t border-gray-200 bg-gray-50 grid grid-cols-1 divide-y divide-gray-200 sm:grid-cols-3 sm:divide-y-0 sm:divide-x">
@@ -193,11 +186,16 @@ export const DashboardMain = () => {
                   </div>
                   <div className="mt-8">
                     <h3 className="text-lg font-medium">
-                      <a href={action.href} className="focus:outline-none">
-                        {/* Extend touch target to entire panel */}
-                        <span className="absolute inset-0" aria-hidden="true" />
-                        {action.name}
-                      </a>
+                      <Link to={action.href}>
+                        <a href={'#'} className="focus:outline-none">
+                          {/* Extend touch target to entire panel */}
+                          <span
+                            className="absolute inset-0"
+                            aria-hidden="true"
+                          />
+                          {action.name}
+                        </a>
+                      </Link>
                     </h3>
                     <p className="mt-2 text-sm text-gray-500">
                       Doloribus dolores nostrum quia qui natus officia quod et

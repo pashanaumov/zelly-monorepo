@@ -1,12 +1,15 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import '../styles.scss';
+import { AppLayout } from './AppLayout';
 import { withAuth } from './components/hoc/withAuth';
 import { MainAppRouter } from './screens/Main/MainAppRoutes';
 
 export function App() {
   return (
     <div className="container">
-      <MainAppRouter />
+      <AppLayout>
+        <MainAppRouter />
+      </AppLayout>
     </div>
   );
 }
