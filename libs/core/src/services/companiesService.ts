@@ -1,4 +1,4 @@
-import { apiService } from './useApiService';
+import { apiService } from './apiService';
 import { CompanyPropertiesResponse } from '../types/Companies/Company';
 import { zellyUrls } from '../Urls';
 

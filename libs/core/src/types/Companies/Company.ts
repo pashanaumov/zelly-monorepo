@@ -1,3 +1,5 @@
+export type CompanyId = string;
+
 export interface ClimaticDataParameters {
   CO2ScopeOne: string;
   CO2ScopeTwo: string;
@@ -15,7 +17,7 @@ export interface ClimaticDataParameters {
 }
 
 export interface CompanyProperties {
-  id: string;
+  id: CompanyId;
   companyNameEnglish: string;
   companyCountry: string;
   industry: string;

@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CompanyProperties } from '../types/Companies/Company';
 
-export interface CompaniesSliceState {
+export interface UserCompaniesSliceState {
   companies: CompanyProperties[];
 }
 
-const INIT_STATE: CompaniesSliceState = {
+const INIT_STATE: UserCompaniesSliceState = {
   companies: [],
 };
 
-export const companiesSlice = createSlice({
+export const userCompaniesSlice = createSlice({
   name: 'companies',
   initialState: INIT_STATE,
   reducers: {
@@ -24,5 +24,5 @@ export const companiesSlice = createSlice({
   },
 });
 
-export const { setCompanies } = companiesSlice.actions;
-export default companiesSlice.reducer;
+export const { setCompanies } = userCompaniesSlice.actions;
+export default userCompaniesSlice.reducer;

@@ -9,5 +9,5 @@ export const uiActions = {
 };
 
 export const companiesActions = {
-  GET_ALL_COMPANIES: 'GET_ALL_COMPANIES',
+  UPDATE_FAVOURITE_COMPANIES: 'UPDATE_FAVOURITE_COMPANIES',
 };

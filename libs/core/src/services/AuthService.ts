@@ -1,7 +1,7 @@
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import { UserEmail, UserPassword } from '../types/Utility/User';
 import { RegisterRequestBody, UserResponse } from '../types/Auth/LoginResponse';
-import { apiService } from './useApiService';
+import { apiService } from './apiService';
 
 const loginUrl = `http://localhost:3000/auth/login`;
 const registerUrl = `http://localhost:3000/auth/register`;
@@ -11,14 +11,12 @@ export function useAuthService() {
   const { POST } = apiService();
 
   function login(email: UserEmail, password: UserPassword) {
-    return POST<UserResponse>(loginUrl, { email, password }).then(
-      (response) => {
-        if (response.token) {
-          setItem(response.token);
-        }
-        return response;
+    return POST<UserResponse>(loginUrl, { email, password }).then((response) => {
+      if (response.token) {
+        setItem(response.token);
       }
-    );
+      return response;
+    });
   }
 
   function logout() {

@@ -1,43 +1,29 @@
-import { companiesService } from '@zelly/core/services/companiesService';
-import { all, call, put, takeEvery } from 'redux-saga/effects';
-import Toast from '../../components/Toast';
+import { all, put, takeEvery } from 'redux-saga/effects';
 import { toggleLoading } from '../ui/uiSlice';
 import { companiesActions } from './sagaActions';
+import { CompanyProperties } from '../../types/Companies/Company';
+import { setCompanies } from '../userCompaniesSlice';
 
 export type CompanyPayload = {
   type: keyof typeof companiesActions;
+  favouriteCompanies: CompanyProperties[];
 };
 
-export function* getAllCompanies() {
-  const { getAll: fetchCompanies } = companiesService;
-
+export function* storeFavouriteCompanies({ favouriteCompanies }: CompanyPayload) {
   yield put(toggleLoading(true));
-
-  try {
-    yield call(() => fetchCompanies());
-    yield put(toggleLoading(false));
-  } catch (e: any) {
-    yield put(toggleLoading(false));
-
-    Toast.showToast({
-      type: 'error',
-      text1: 'Error',
-      text2: e.message || '',
-    });
-
-    console.log(e.message);
-  }
+  yield put(setCompanies({ companies: favouriteCompanies }));
+  yield put(toggleLoading(false));
 }
 
-export function runFetchAllCompanies() {
-  console.log('first');
+export function runFetchAllCompanies({ favouriteCompanies }: CompanyPayload) {
   return {
-    type: companiesActions.GET_ALL_COMPANIES,
+    type: companiesActions.UPDATE_FAVOURITE_COMPANIES,
+    favouriteCompanies,
   };
 }
 
 export function* watchGetAllCompanies() {
-  yield takeEvery(companiesActions.GET_ALL_COMPANIES, getAllCompanies);
+  yield takeEvery(companiesActions.UPDATE_FAVOURITE_COMPANIES, storeFavouriteCompanies);
 }
 
 export function* companiesSagas() {
