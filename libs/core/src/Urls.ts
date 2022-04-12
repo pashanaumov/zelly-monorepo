@@ -5,4 +5,5 @@ export const zellyUrls = {
   getAllCompanies: `http://localhost:3000/companies`,
   connectUserToCompany: 'http://localhost:3000/user/connectCompany',
   getUserCompanies: `http://localhost:3000/user/relations`,
+  removeCompanyFromUser: `http://localhost:3000/user/removeCompany`
 };

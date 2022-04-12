@@ -7,6 +7,10 @@ export const userService = {
     const { POST } = apiService();
     return await POST<CompanyProperties[]>(zellyUrls.connectUserToCompany, { companyId });
   },
+  async removeCompanyFromUser(companyId: CompanyId) {
+    const { POST } = apiService();
+    return await POST<CompanyProperties[]>(zellyUrls.removeCompanyFromUser, { companyId });
+  },
   async getLinkedCompanies() {
     const { GET } = apiService();
     return await GET<CompanyProperties[]>(zellyUrls.getUserCompanies);
