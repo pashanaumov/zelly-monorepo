@@ -8,7 +8,7 @@ import React from 'react';
 import { useUserInfo } from '@zelly/core/hooks/useUserInfo';
 import { Link } from 'react-router-dom';
 import { Avatar } from '../../components/common/Avatar/Avatar';
-import { UserFollowingCompaniesWidget } from './components/UserFollowingCompanies';
+import { UserFollowingCompaniesWidget } from './components/UserFollowingCompaniesWidget';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
