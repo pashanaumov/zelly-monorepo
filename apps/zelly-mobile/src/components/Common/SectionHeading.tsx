@@ -17,8 +17,8 @@ export const SectionHeading: FC<Props> = ({ sectionTitle }) => {
         </View>
         <View style={styles.subheadingContainer}>
           <Subheading>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.{' '}
+            A list of all the companies in the Zelly database including their
+            name, industry, country and last CO2 emission numbers.{' '}
           </Subheading>
         </View>
       </Card>

@@ -13,10 +13,10 @@ const actions = [
   },
   {
     icon: 'trending-up',
-    name: 'Посмотреть тренды пользователей',
+    name: 'Посмотреть список компаний',
     iconForeground: 'rgb(127, 48, 201)',
     iconBackground: 'rgb(250, 245, 255)',
-    navLink: 'UserTrends',
+    navLink: 'AllCompaniesListScreen',
   },
   {
     icon: 'chatbubble-ellipses-outline',
@@ -39,6 +39,7 @@ export const ProfileScreenActions = () => {
 
   function proceedToScreen(destination: string) {
     return () => {
+      // @ts-ignore
       navigation.navigate(destination);
     };
   }

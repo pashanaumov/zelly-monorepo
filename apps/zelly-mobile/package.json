@@ -31,6 +31,8 @@
     "react-native-vector-icons": "*",
     "@react-navigation/bottom-tabs": "*",
     "react-native-parallax-header": "*",
-    "@heroicons/react": "*"
+    "@heroicons/react": "*",
+    "react-content-loader": "*",
+    "react-query": "*"
   }
 }

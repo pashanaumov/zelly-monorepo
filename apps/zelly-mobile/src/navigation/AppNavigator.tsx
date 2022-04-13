@@ -16,7 +16,7 @@ import { AppHeader } from './AppHeader';
 import { ProfileScreen } from './Main/Profile/ProfileScreen';
 import { UserCarbonFootprintScreen } from './Main/Profile/UserCarbonFootprintScreen';
 import { UserCompaniesScreen } from './Main/Profile/UserCompaniesScreen';
-import { UserTrendsScreen } from './Main/Profile/UserTrendsScreen';
+import { UserAllCompaniesListScreen } from './Main/Profile/UserAllCompaniesListScreen';
 import { UserForumsScreen } from './Main/Profile/UserForumsScreen';
 import { UserEducationScreen } from './Main/Profile/UserEducationScreen';
 import { FootprintCalculator } from './Main/Calculator/FootprintCalculator';
@@ -118,7 +118,10 @@ function ProfileStack() {
         name="UserCompanies"
         component={UserCompaniesScreen}
       />
-      <ProfileStackNav.Screen name="UserTrends" component={UserTrendsScreen} />
+      <ProfileStackNav.Screen
+        name="AllCompaniesListScreen"
+        component={UserAllCompaniesListScreen}
+      />
       <ProfileStackNav.Screen name="UserForums" component={UserForumsScreen} />
       <ProfileStackNav.Screen
         name="UserEducation"
