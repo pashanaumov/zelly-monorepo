@@ -1,44 +1,65 @@
-import { FC, Fragment, useEffect } from 'react';
 import { Dialog, Menu, Transition } from '@headlessui/react';
-import { XIcon } from '@heroicons/react/outline';
-import { BadgeCheckIcon, DotsVerticalIcon } from '@heroicons/react/outline';
+import {
+  BadgeCheckIcon,
+  DotsVerticalIcon,
+  XIcon,
+} from '@heroicons/react/outline';
+import { useFollowCompany } from '@zelly/core/queries/useFollowCompany';
+import { useUnfollowCompany } from '@zelly/core/queries/useUnfollowCompany';
+import { useUserCompanies } from '@zelly/core/queries/useUserCompanies';
 import {
   CompanyId,
   CompanyProperties,
 } from '@zelly/core/types/Companies/Company';
+import { FC, Fragment, useMemo } from 'react';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-type FavouriteCompaniesIds = {
-  [key: CompanyId]: string;
-};
-
 interface Props {
   isOpen: boolean;
-  hasFavouriteCompanies: boolean;
   currentCompany: CompanyProperties | undefined;
-  favouriteCompanies: FavouriteCompaniesIds;
   setIsCompanyModalOpen: (isOpen: boolean) => void;
-  onAddToFavourites: (companyId: CompanyId) => void;
-  onRemoveFromFavorites: (companyId: CompanyId) => void;
 }
 
 export const CompanyInformationModal: FC<Props> = ({
-  hasFavouriteCompanies,
   isOpen,
   setIsCompanyModalOpen,
   currentCompany,
-  favouriteCompanies,
-  onAddToFavourites,
-  onRemoveFromFavorites,
 }) => {
+  const { mutateFollow } = useFollowCompany();
+  const { mutateUnfollow } = useUnfollowCompany();
+
+  const { data: favouriteCompanies } = useUserCompanies();
+
+  const favCompaniesIds = useMemo(() => {
+    if (!favouriteCompanies) {
+      return {};
+    }
+    return favouriteCompanies.reduce((prevValue, currentValue) => {
+      return {
+        ...prevValue,
+        [currentValue.id]: currentValue.companyNameEnglish,
+      };
+    }, {});
+  }, [favouriteCompanies]);
+
+  const hasFavouriteCompanies = Object.keys(favCompaniesIds).length;
+
   const isFavourite = Boolean(
     hasFavouriteCompanies &&
       currentCompany &&
-      currentCompany.id in favouriteCompanies,
+      currentCompany.id in favCompaniesIds,
   );
+
+  function addToFavorites(companyId: CompanyId) {
+    mutateFollow(companyId);
+  }
+
+  function removeFromFavorites(companyId: CompanyId) {
+    mutateUnfollow(companyId);
+  }
 
   if (!currentCompany) {
     return <></>;
@@ -51,7 +72,7 @@ export const CompanyInformationModal: FC<Props> = ({
 
   const followButton = isFavourite ? (
     <button
-      onClick={() => onRemoveFromFavorites(currentCompany.id)}
+      onClick={() => removeFromFavorites(currentCompany.id)}
       type="button"
       className="inline-flex items-center px-32 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
       Following
@@ -59,7 +80,7 @@ export const CompanyInformationModal: FC<Props> = ({
     </button>
   ) : (
     <button
-      onClick={() => onAddToFavourites(currentCompany.id)}
+      onClick={() => addToFavorites(currentCompany.id)}
       type="button"
       className="inline-flex items-center px-32 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
       Follow

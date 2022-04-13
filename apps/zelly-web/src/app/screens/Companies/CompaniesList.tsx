@@ -1,13 +1,13 @@
 import { LoadingPlaceholder } from '@zelly/core/components/LoadingPlaceholder';
 import { useFetchCompanies } from '@zelly/core/queries/useFetchCompanies';
+import { useFollowCompany } from '@zelly/core/queries/useFollowCompany';
+import { useUnfollowCompany } from '@zelly/core/queries/useUnfollowCompany';
 import { useUserCompanies } from '@zelly/core/queries/useUserCompanies';
-import { userService } from '@zelly/core/services/userService';
 import {
   CompanyId,
   CompanyProperties,
 } from '@zelly/core/types/Companies/Company';
 import React, { useMemo, useState } from 'react';
-import { useMutation } from 'react-query';
 import { CompanyInformationModal } from './CompanyInformationModal';
 import { AddToFavouritesButton } from './components/AddToFavouritesButton';
 
@@ -15,9 +15,11 @@ export const CompaniesList = () => {
   const [currentCompany, setCurrentCompany] = useState<CompanyProperties>();
   const [isCompanyModalOpen, setIsCompanyModalOpen] = useState<boolean>(false);
 
-  const { data: favouriteCompanies, refetch } = useUserCompanies();
-
+  const { data: favouriteCompanies } = useUserCompanies();
   const { isLoading, data } = useFetchCompanies();
+
+  const { mutateFollow, isMutationLoading } = useFollowCompany();
+  const { mutateUnfollow, isMutationUnfollowLoading } = useUnfollowCompany();
 
   const favCompaniesIds = useMemo(() => {
     if (!favouriteCompanies) {
@@ -33,35 +35,8 @@ export const CompaniesList = () => {
 
   const hasFavouriteCompanies = Object.keys(favCompaniesIds).length;
 
-  const { mutateAsync, isLoading: isMutationLoading } = useMutation(
-    'addCompanyToUser',
-    (company: CompanyId) => userService.linkCompanyToUser(company),
-    {
-      onSuccess: (data: CompanyProperties[]) => {
-        refetch();
-      },
-      onError: (err) => {
-        console.log(err);
-      },
-    },
-  );
-
-  const { mutateAsync: mutateUnfollow, isLoading: isMutationUnfollowLoading } =
-    useMutation(
-      'removeCompanyFromUser',
-      (company: CompanyId) => userService.removeCompanyFromUser(company),
-      {
-        onSuccess: (data: CompanyProperties[]) => {
-          refetch();
-        },
-        onError: (err) => {
-          console.log(err);
-        },
-      },
-    );
-
   function addToFavorites(companyId: CompanyId) {
-    mutateAsync(companyId);
+    mutateFollow(companyId);
   }
 
   function removeFromFavorites(companyId: CompanyId) {
@@ -169,10 +144,6 @@ export const CompaniesList = () => {
         </div>
       </div>
       <CompanyInformationModal
-        hasFavouriteCompanies={!!hasFavouriteCompanies}
-        onAddToFavourites={addToFavorites}
-        onRemoveFromFavorites={removeFromFavorites}
-        favouriteCompanies={favCompaniesIds}
         setIsCompanyModalOpen={setIsCompanyModalOpen}
         isOpen={isCompanyModalOpen}
         currentCompany={currentCompany}
