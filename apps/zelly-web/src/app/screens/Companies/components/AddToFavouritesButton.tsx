@@ -7,7 +7,6 @@ interface Props {
   companyId: CompanyId;
   onAddToFavourites: (companyId: CompanyId) => void;
   onRemoveFromFavorites: (companyId: CompanyId) => void;
-  onShowCompanyDetails: () => void;
 }
 
 export const AddToFavouritesButton: FC<Props> = ({
@@ -22,7 +21,6 @@ export const AddToFavouritesButton: FC<Props> = ({
   }
 
   function removeFromFavorites() {
-    console.log('removing')
     onRemoveFromFavorites(companyId);
   }
 
