@@ -15,36 +15,38 @@ function classNames(...classes: string[]) {
 }
 
 const stats = [
-  { label: 'Блок данных', value: '1-й' },
-  { label: 'Блок данных', value: '2-й' },
-  { label: 'Блок данных', value: '3-й' },
+  { label: '１', value: 'Personal Data' },
+  { label: '𝟸', value: 'Personal Data' },
+  { label: '３', value: 'Personal Data' },
 ];
 
 const actions = [
   {
     icon: CalculatorIcon,
-    name: 'Рассчитать Ваш углеродный след',
+    name: 'Calculate footprint',
     href: '#',
     iconForeground: 'text-teal-700',
     iconBackground: 'bg-teal-50',
   },
   {
-    icon: TrendingUpIcon,
-    name: 'Посмотреть список компаний',
+    icon: InformationCircleIcon,
+    name: 'Companies',
     href: '/companies',
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50',
   },
   {
     icon: ChatIcon,
-    name: 'Перейти на форум',
+    name: 'Forums and discussions',
     href: '#',
     iconForeground: 'text-sky-700',
     iconBackground: 'bg-sky-50',
   },
   {
-    icon: InformationCircleIcon,
-    name: 'Читать информацию',
+
+
+    icon: TrendingUpIcon,
+    name: 'User trends',
     href: '#',
     iconForeground: 'text-yellow-700',
     iconBackground: 'bg-yellow-50',
@@ -200,7 +202,7 @@ export const DashboardMain = () => {
                 <h2
                   className="text-base font-medium text-gray-900"
                   id="announcements-title">
-                  Последние расчёты
+                  Last footprint calculations
                 </h2>
                 <div className="flow-root mt-6">
                   <ul role="list" className="-my-5 divide-y divide-gray-200">

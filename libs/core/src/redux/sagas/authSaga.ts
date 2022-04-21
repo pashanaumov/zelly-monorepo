@@ -1,6 +1,7 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 import Toast from '../../components/Toast';
-import { useAuthService } from '../../services/AuthService';
+import { useAuthService } from '../../services/authService';
 import { UserResponse } from '../../types/Auth/LoginResponse';
 import { UserEmail, UserPassword } from '../../types/Utility/User';
 import { authUser } from '../authSlice';
@@ -46,16 +47,14 @@ export function* watchloginUser() {
 function* logoutUser() {
   yield put(authUser(null));
   yield put(setUser({ user: null }));
+  yield AsyncStorage.clear();
 }
 
 export function* watchLogoutUser() {
   yield takeEvery(sagaActions.LOGOUT_USER, logoutUser);
 }
 
-export function runFetchData(payload: {
-  email: UserEmail;
-  password: UserPassword;
-}) {
+export function runFetchData(payload: { email: UserEmail; password: UserPassword }) {
   return {
     type: sagaActions.LOGIN_USER,
     email: payload.email,

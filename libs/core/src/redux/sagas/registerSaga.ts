@@ -1,6 +1,6 @@
 import { Platform } from "react-native";
 import { all, call, put, takeEvery } from "redux-saga/effects";
-import { useAuthService } from "../../services/AuthService";
+import { useAuthService } from "../../services/authService";
 import { UserResponse } from "../../types/Auth/LoginResponse";
 import { UserCountry, UserLanguage } from "../../types/Utility/User";
 import { authUser } from "../authSlice";

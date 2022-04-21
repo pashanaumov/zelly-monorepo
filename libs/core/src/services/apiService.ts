@@ -1,33 +1,26 @@
-import { useAsyncStorage } from "@react-native-async-storage/async-storage";
-import axios, { AxiosRequestHeaders } from "axios";
-import {
-  FetchMethod,
-  HttpMethod,
-  RequestBody,
-  Url,
-} from "../types/Utility/Http";
+import { useAsyncStorage } from '@react-native-async-storage/async-storage';
+import axios, { AxiosRequestHeaders } from 'axios';
+import { jwtAuthInterceptor } from '../interceptors/jwtAuthInterceptor';
+import { FetchMethod, HttpMethod, RequestBody, Url } from '../types/Utility/Http';
+
+jwtAuthInterceptor();
 
 export function apiService() {
-  const { getItem } = useAsyncStorage("user");
+  const { getItem } = useAsyncStorage('user');
 
   const defaultHeaders: AxiosRequestHeaders = {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   };
 
-  async function fetchData<T>(
-    route: Url,
-    method: FetchMethod,
-    body: RequestBody<any> = null,
-    headers: AxiosRequestHeaders | null = null
-  ) {
+  async function fetchData<T>(route: Url, method: FetchMethod, body: RequestBody<any> = null, headers: AxiosRequestHeaders | null = null) {
     if (!route) {
-      throw new Error("Route is not defined");
+      throw new Error('Route is not defined');
     }
 
     const user = await getItem();
 
     if (user) {
-      defaultHeaders["Authorization"] = `Bearer ${user}`;
+      defaultHeaders['Authorization'] = `Bearer ${user}`;
     }
 
     if (headers) {
@@ -38,17 +31,13 @@ export function apiService() {
       method,
       url: route,
       headers: defaultHeaders,
-      data: body,
+      data: body || undefined,
     });
 
     return (await response.data) as T;
   }
 
-  function GET<T>(
-    route: Url,
-    headers: AxiosRequestHeaders | null = null,
-    body: RequestBody<any> | null = null
-  ) {
+  function GET<T>(route: Url, headers: AxiosRequestHeaders | null = null, body: RequestBody<any> | null = null) {
     return fetchData<T>(route, HttpMethod.GET, body, headers);
   }
 
@@ -56,11 +45,7 @@ export function apiService() {
     return fetchData<T>(route, HttpMethod.POST, body);
   }
 
-  function PATCH<T>(
-    route: Url,
-    body: RequestBody<any>,
-    headers: AxiosRequestHeaders | null = null
-  ) {
+  function PATCH<T>(route: Url, body: RequestBody<any>, headers: AxiosRequestHeaders | null = null) {
     return fetchData<T>(route, HttpMethod.PATCH, body, headers);
   }
 

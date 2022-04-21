@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import '../styles.scss';
+import '../styles/styles.scss';
 import { AppLayout } from './AppLayout';
 import { withAuth } from './components/hoc/withAuth';
 import { MainAppRouter } from './screens/Main/MainAppRoutes';

@@ -1,8 +1,10 @@
-import React, {FC} from 'react';
-import {CompanyId} from '@zelly/core/types/Companies/Company';
-import {BadgeCheckIcon} from '@heroicons/react/solid'
+import { useFollowCompany } from '@zelly/core/queries/useFollowCompany';
+import { useUnfollowCompany } from '@zelly/core/queries/useUnfollowCompany';
+import { CompanyId } from '@zelly/core/types/Companies/Company';
+import React, { FC } from 'react';
 
 interface Props {
+  isLoading: boolean;
   isFavourite: boolean;
   companyId: CompanyId;
   onAddToFavourites: (companyId: CompanyId) => void;
@@ -10,12 +12,11 @@ interface Props {
 }
 
 export const AddToFavouritesButton: FC<Props> = ({
-                                                   isFavourite,
-                                                   onAddToFavourites,
-                                                   companyId,
-                                                   onRemoveFromFavorites
-                                                 }) => {
-
+  isFavourite,
+  onAddToFavourites,
+  companyId,
+  onRemoveFromFavorites,
+}) => {
   function addToFavourites() {
     onAddToFavourites(companyId);
   }
@@ -24,26 +25,30 @@ export const AddToFavouritesButton: FC<Props> = ({
     onRemoveFromFavorites(companyId);
   }
 
-  if (isFavourite) {
-    return <button
-      onClick={removeFromFavorites}
-      type="button"
-      className="inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-    >
-      Following
-      <BadgeCheckIcon className="ml-2 -mr-0.5 h-4 w-4" aria-hidden="true"/>
-    </button>
-  }
+  const { mutateFollow, isMutationLoading } = useFollowCompany();
+  const { mutateUnfollow, isMutationUnfollowLoading } = useUnfollowCompany();
+
+  const isLoading = isMutationLoading || isMutationUnfollowLoading;
+
+  const buttonText = isFavourite ? 'Unfollow' : 'Follow';
+
+  const buttonClassName = `inline-flex items-center px-${
+    isFavourite ? 6 : 8
+  } py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`;
+
+  const onProcessFollowing = async () => {
+    if (isFavourite) {
+      return await mutateUnfollow(companyId);
+    }
+    return await mutateFollow(companyId);
+  };
 
   return (
     <button
-      onClick={addToFavourites}
+      onClick={onProcessFollowing}
       type="button"
-      className="inline-flex items-center px-8 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-    >
-      Follow
+      className={buttonClassName}>
+      {isLoading ? 'Loading' : buttonText}
     </button>
-
-  )
-
-}
+  );
+};

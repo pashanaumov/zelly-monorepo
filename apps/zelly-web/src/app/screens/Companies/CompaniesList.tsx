@@ -120,19 +120,18 @@ export const CompaniesList = () => {
                             {company.lastCO2Number}
                           </td>
                           <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                            {isMutationLoading || isMutationUnfollowLoading ? (
-                              <p>Loading...</p>
-                            ) : (
-                              <AddToFavouritesButton
-                                companyId={company.id}
-                                onAddToFavourites={addToFavorites}
-                                onRemoveFromFavorites={removeFromFavorites}
-                                isFavourite={Boolean(
-                                  hasFavouriteCompanies &&
-                                    company.id in favCompaniesIds,
-                                )}
-                              />
-                            )}
+                            <AddToFavouritesButton
+                              isLoading={
+                                isMutationLoading || isMutationUnfollowLoading
+                              }
+                              companyId={company.id}
+                              onAddToFavourites={addToFavorites}
+                              onRemoveFromFavorites={removeFromFavorites}
+                              isFavourite={Boolean(
+                                hasFavouriteCompanies &&
+                                  company.id in favCompaniesIds,
+                              )}
+                            />
                           </td>
                         </tr>
                       ))}

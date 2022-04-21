@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { RootState } from '@zelly/core/redux/storeWeb';
 import { MainHeader } from './MainHeader';
 import db from '@zelly/core/firebase.config';
+import Home from '../Landing/Home';
 
 interface User {
   age: number;
@@ -16,7 +17,7 @@ export const MainContent: FC = () => {
   const user = useSelector((state: RootState) => state.user.user);
 
   if (!user) {
-    return <Link to="/login">Login</Link>;
+    return <Home />;
   }
 
   return (
