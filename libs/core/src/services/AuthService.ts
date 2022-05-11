@@ -7,7 +7,7 @@ import { zellyUrls } from '../Urls';
 const loginUrl = `https://zelly-server.herokuapp.com/auth/login`;
 const registerUrl = `https://zelly-server.herokuapp.com/auth/register`;
 
-export function useAuthService() {
+export function authService() {
   const { setItem, removeItem } = useAsyncStorage('user');
   const { POST, GET } = apiService();
 
