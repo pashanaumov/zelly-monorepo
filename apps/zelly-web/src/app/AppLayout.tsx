@@ -1,13 +1,11 @@
-import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
-import { SearchIcon } from '@heroicons/react/solid';
+import { Disclosure } from '@headlessui/react';
+import { BellIcon } from '@heroicons/react/outline';
 import { sagaActions } from '@zelly/core/redux/sagas/sagaActions';
 import { RootState } from '@zelly/core/redux/storeWeb';
-import { useAuthService } from '@zelly/core/services/authService';
-import { Fragment, PropsWithChildren, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
 import AOS from 'aos';
+import { PropsWithChildren, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import Header from './screens/Landing/partials/Header';
 
 const user = {
