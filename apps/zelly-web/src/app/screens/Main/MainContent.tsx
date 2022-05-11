@@ -31,9 +31,6 @@ export const MainContent: FC = () => {
             <span className="block text-indigo-600">
               Country: {user.country}
             </span>
-            <span className="block text-indigo-600">
-              Language: {user.language}
-            </span>
           </h2>
           <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
             <div

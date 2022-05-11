@@ -23,6 +23,7 @@ export const RegisterScreen = () => {
   const [language, setLanguage] = useState<UserLanguage | ''>('');
 
   function onRegister(data: Omit<RegisterUserPayload, 'type'>) {
+    console.log(data);
     dispatch(runRegisterUser(data));
   }
 
@@ -33,9 +34,7 @@ export const RegisterScreen = () => {
       country: '',
     },
     onSubmit: (_values) => {
-      if (language) {
-        onRegister({ ..._values, language });
-      }
+      onRegister({ ..._values });
     },
   });
 
@@ -59,7 +58,7 @@ export const RegisterScreen = () => {
 
                 {/* Form */}
                 <div className="max-w-sm mx-auto">
-                  <form>
+                  <form onSubmit={handleSubmit}>
                     <div className="flex flex-wrap -mx-3 mb-4">
                       <div className="w-full px-3">
                         <label
