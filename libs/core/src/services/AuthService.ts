@@ -25,12 +25,11 @@ export function useAuthService() {
   }
 
   function register(body: RegisterRequestBody) {
-    const { email, password, language, country } = body;
+    const { email, password, country } = body;
 
     return POST<UserResponse>(registerUrl, {
       email,
       password,
-      language,
       country,
     }).then((response) => {
       if (response.token) {

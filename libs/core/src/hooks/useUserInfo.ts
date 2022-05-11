@@ -16,7 +16,6 @@ export function useUserInfo() {
 
   return {
     country: user?.country || '',
-    language: user?.language || '',
     id: user?.id || '',
     email: user?.email || '',
     token: user?.token || '',

@@ -1,16 +1,15 @@
-import { Platform } from "react-native";
-import { all, call, put, takeEvery } from "redux-saga/effects";
-import { useAuthService } from "../../services/authService";
-import { UserResponse } from "../../types/Auth/LoginResponse";
-import { UserCountry, UserLanguage } from "../../types/Utility/User";
-import { authUser } from "../authSlice";
-import { toggleLoading } from "../ui/uiSlice";
-import { setUser } from "../userSlice";
-import { LoginUserPayload } from "./authSaga";
-import { sagaActions } from "./sagaActions";
+import { Platform } from 'react-native';
+import { all, call, put, takeEvery } from 'redux-saga/effects';
+import { useAuthService } from '../../services/authService';
+import { UserResponse } from '../../types/Auth/LoginResponse';
+import { UserCountry } from '../../types/Utility/User';
+import { authUser } from '../authSlice';
+import { toggleLoading } from '../ui/uiSlice';
+import { setUser } from '../userSlice';
+import { LoginUserPayload } from './authSaga';
+import { sagaActions } from './sagaActions';
 
 export type RegisterUserPayload = LoginUserPayload & {
-  language: UserLanguage;
   country: UserCountry;
 };
 
@@ -27,7 +26,7 @@ function* registerUser(payload: RegisterUserPayload) {
   } catch (e: any) {
     yield put(toggleLoading(false));
 
-    if (Platform.OS !== "web") {
+    if (Platform.OS !== 'web') {
       // @TODO: CHANGE
       // Toast.showToast("error", "Error", e.message || "");
     }
@@ -39,13 +38,12 @@ export function* watchRegisterUser() {
   yield takeEvery(sagaActions.REGISTER_USER, registerUser);
 }
 
-export function runRegisterUser(payload: Omit<RegisterUserPayload, "type">) {
-  const { email, password, language, country } = payload;
+export function runRegisterUser(payload: Omit<RegisterUserPayload, 'type'>) {
+  const { email, password, country } = payload;
   return {
     type: sagaActions.REGISTER_USER,
     email,
     password,
-    language,
     country,
   };
 }
