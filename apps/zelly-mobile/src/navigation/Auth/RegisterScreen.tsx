@@ -30,7 +30,6 @@ type Props = {
 const RegisterScreen = ({ navigation }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const [language, setLanguage] = useState<UserLanguage | ''>('');
   const [_email, setEmail] = useState({ error: '' });
   const [_password, setPassword] = useState({ error: '' });
   const [_country, setCountry] = useState({ error: '' });
@@ -114,22 +113,6 @@ const RegisterScreen = ({ navigation }: Props) => {
         error={!!_country.error}
         errorText={_country.error}
       />
-
-      <TouchableOpacity
-        onPress={toggleModal}
-        style={{
-          width: '100%',
-        }}>
-        <View pointerEvents={'none'}>
-          <TextInput
-            value={language}
-            label="Language"
-            returnKeyType="done"
-            error={!!_country.error}
-            errorText={_country.error}
-          />
-        </View>
-      </TouchableOpacity>
 
       <TextInput
         label="Password"

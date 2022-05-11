@@ -4,8 +4,8 @@ import { RegisterRequestBody, UserResponse } from '../types/Auth/LoginResponse';
 import { apiService } from './apiService';
 import { zellyUrls } from '../Urls';
 
-const loginUrl = `http://localhost:3000/auth/login`;
-const registerUrl = `http://localhost:3000/auth/register`;
+const loginUrl = `https://zelly-server.herokuapp.com/auth/login`;
+const registerUrl = `https://zelly-server.herokuapp.com/auth/register`;
 
 export function useAuthService() {
   const { setItem, removeItem } = useAsyncStorage('user');
@@ -54,6 +54,6 @@ export function useAuthService() {
     login,
     logout,
     register,
-    checkUserToken
+    checkUserToken,
   };
 }

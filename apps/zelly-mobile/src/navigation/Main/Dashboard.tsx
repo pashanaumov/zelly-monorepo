@@ -24,7 +24,6 @@ const Dashboard = () => {
       <Paragraph>Email: {user.email}</Paragraph>
       <Paragraph>UserId: {user.id}</Paragraph>
       <Paragraph>Country: {user.country}</Paragraph>
-      <Paragraph>Preferred language: {user.language}</Paragraph>
 
       <Button mode="outlined" onPress={logoutUser}>
         Logout

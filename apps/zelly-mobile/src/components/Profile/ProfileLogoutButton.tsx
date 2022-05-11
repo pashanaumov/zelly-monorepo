@@ -14,7 +14,7 @@ export const ProfileLogoutButton = () => {
   return (
     <View style={styles.buttonContainer}>
       <Button mode="contained" onPress={logoutUser}>
-        Выйти
+        Logout
       </Button>
     </View>
   );

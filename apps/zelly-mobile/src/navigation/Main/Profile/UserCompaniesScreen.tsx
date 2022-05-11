@@ -5,12 +5,15 @@ import { SectionSubheading } from '../../../components/Common/SectionSubheading'
 import { Button } from 'react-native-paper';
 import { FullScreenSlidingModal } from '../../../components/Common/Modal/FullScreenSlidingModal';
 import { UserCompaniesList } from '../../../components/Profile/UserCompanies/UserCompaniesList';
+import { useNavigation } from '@react-navigation/native';
 
 export const UserCompaniesScreen = () => {
+  const navigation = useNavigation();
+
   const [modalVisible, setModalVisible] = useState(false);
 
   function openModal() {
-    setModalVisible(true);
+    navigation.navigate('AllCompaniesListScreen');
   }
 
   function closeModal() {
@@ -21,7 +24,7 @@ export const UserCompaniesScreen = () => {
     <>
       <View style={styles.overallContainer}>
         <View style={styles.upperContainer}>
-          <SectionHeading sectionTitle={'Your Companies'} />
+          <SectionHeading sectionTitle={'You follow'} />
           <SectionSubheading>
             <View style={styles.subheadingInnerContainer}>
               <Button mode="contained" onPress={openModal}>

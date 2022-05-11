@@ -10,7 +10,12 @@ export const ProfileScreenUserCompanies = () => {
 
   const { data, isLoading } = useUserCompanies();
 
-  const userCompanies = useMemo(() => data.slice(0, 3), [data]);
+  const userCompanies = useMemo(() => {
+    if (!data) {
+      return [];
+    }
+    return data.slice(0, 3);
+  }, [data]);
 
   const mainContent = useMemo(() => {
     if (isLoading) {
@@ -41,16 +46,14 @@ export const ProfileScreenUserCompanies = () => {
 
   return (
     <View style={styles.container}>
-      <Subheading style={styles.subheading}>
-        Компании за которыми Вы следите
-      </Subheading>
+      <Subheading style={styles.subheading}>Companies you follow</Subheading>
       {mainContent}
       <Button
         style={styles.showAllButton}
         mode="text"
         // @ts-ignore
         onPress={() => navigation.navigate('UserCompanies')}>
-        Показать все
+        Show all
       </Button>
     </View>
   );

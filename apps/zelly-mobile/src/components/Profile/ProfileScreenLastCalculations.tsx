@@ -38,7 +38,9 @@ export const ProfileScreenLastCalculations = () => {
 
   return (
     <View style={styles.container}>
-      <Subheading style={styles.subheading}>Последние расчёты</Subheading>
+      <Subheading style={styles.subheading}>
+        Last footprint calculations
+      </Subheading>
       <>
         {lastCalculations.map((calc, index) => {
           return (
@@ -63,7 +65,7 @@ export const ProfileScreenLastCalculations = () => {
         mode="text"
         // @ts-ignore
         onPress={() => navigation.navigate('UserCarbonFootprint')}>
-        Показать все
+        Show all
       </Button>
     </View>
   );

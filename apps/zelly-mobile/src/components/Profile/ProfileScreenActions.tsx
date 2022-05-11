@@ -6,28 +6,28 @@ import { useNavigation } from '@react-navigation/core';
 const actions = [
   {
     icon: 'calculator',
-    name: 'Рассчитать Ваш углеродный след',
+    name: 'Personal footprint calculator',
     iconForeground: 'rgb(0, 118, 110)',
     iconBackground: 'rgb(239, 253, 250)',
     navLink: 'UserCarbonFootprint',
   },
   {
     icon: 'trending-up',
-    name: 'Посмотреть список компаний',
+    name: 'Companies',
     iconForeground: 'rgb(127, 48, 201)',
     iconBackground: 'rgb(250, 245, 255)',
     navLink: 'AllCompaniesListScreen',
   },
   {
     icon: 'chatbubble-ellipses-outline',
-    name: 'Перейти на форум',
+    name: 'Forum',
     iconForeground: 'rgb(0, 107, 159)',
     iconBackground: 'rgb(240, 249, 255)',
     navLink: 'UserForums',
   },
   {
     icon: 'information-circle-outline',
-    name: 'Читать информацию',
+    name: 'Useful information',
     iconForeground: 'rgb(163, 97, 24)',
     iconBackground: 'rgb(254, 252, 233)',
     navLink: 'UserEducation',

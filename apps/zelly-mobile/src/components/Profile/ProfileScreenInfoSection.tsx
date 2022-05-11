@@ -22,8 +22,8 @@ export const ProfileScreenInfoSection = () => {
         </View>
         <View>
           <Text>
-            CO<SubscriptText subscriptFontSize={10}>2</SubscriptText> с начала
-            года: 20кг
+            CO<SubscriptText subscriptFontSize={10}>2</SubscriptText> in
+            {` ${new Date().getFullYear()}`} - 0kg
           </Text>
         </View>
       </View>

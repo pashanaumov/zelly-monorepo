@@ -1,11 +1,11 @@
 export const zellyUrls = {
-  loginUrl: `http://localhost:3000/auth/login`,
-  registerUrl: `http://localhost:3000/auth/register`,
+  loginUrl: `https://zelly-server.herokuapp.com/auth/login`,
+  registerUrl: `https://zelly-server.herokuapp.com/auth/register`,
 
-  getAllCompanies: `http://localhost:3000/companies`,
-  connectUserToCompany: 'http://localhost:3000/user/connectCompany',
-  getUserCompanies: `http://localhost:3000/user/relations`,
-  removeCompanyFromUser: `http://localhost:3000/user/removeCompany`,
+  getAllCompanies: `https://zelly-server.herokuapp.com/companies`,
+  connectUserToCompany: 'https://zelly-server.herokuapp.com/user/connectCompany',
+  getUserCompanies: `https://zelly-server.herokuapp.com/user/relations`,
+  removeCompanyFromUser: `https://zelly-server.herokuapp.com/user/removeCompany`,
 
-  checkUser: `http://localhost:3000/auth/user`,
+  checkUser: `https://zelly-server.herokuapp.com/auth/user`,
 };

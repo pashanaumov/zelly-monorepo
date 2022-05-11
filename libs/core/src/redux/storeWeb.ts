@@ -1,13 +1,10 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
-import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
-
-import userCompaniesReducer from './userCompaniesSlice';
 import authReducer from './authSlice';
-import userReducer from './userSlice';
-
 import rootSaga from './sagas/rootSaga';
+import userReducer from './userSlice';
 
 const persistConfig = {
   key: 'root',
@@ -19,7 +16,6 @@ const sagaMiddleware = createSagaMiddleware();
 const rootReducer = combineReducers({
   auth: authReducer,
   user: userReducer,
-  userFavouriteCompanies: userCompaniesReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

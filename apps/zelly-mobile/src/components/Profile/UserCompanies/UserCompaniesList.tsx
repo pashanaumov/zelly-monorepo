@@ -1,45 +1,51 @@
-import React, { useCallback, useState } from 'react';
+import { useUserCompanies } from '@zelly/core/queries/useUserCompanies';
+import { CompanyProperties } from '@zelly/core/types/Companies/Company';
+import { CompanyInfoProvider } from 'apps/zelly-mobile/src/providers/CompanyInfoProvider';
+import React, { useCallback, useMemo, useState } from 'react';
 import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { List } from 'react-native-paper';
+import { CompanyInfoContainer } from '../../Common/Company/CompanyInfoContainer';
 import { FullScreenSlidingModal } from '../../Common/Modal/FullScreenSlidingModal';
 
-const userCompanies = [
-  {
-    name: 'Gazprom',
-    handle: 'gazprom',
-  },
-  {
-    name: 'СБЕР ЕАПТЕКА',
-    handle: 'ЕА',
-  },
-  {
-    name: 'Х5Group',
-    handle: 'x5',
-  },
-  {
-    name: 'Mercedes-Benz',
-    handle: 'amgf1',
-  },
-];
-
 export const UserCompaniesList = () => {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [isCompanyModalOpen, setIsCompanyModalOpen] = useState<boolean>(false);
+  const [currentCompany, setCurrentCompany] = useState<
+    CompanyProperties | undefined
+  >(undefined);
 
-  function openModal() {
-    setModalVisible(true);
+  const { data: userCompanies } = useUserCompanies();
+
+  const favCompaniesIds = useMemo(() => {
+    if (!userCompanies) {
+      return {};
+    }
+    return userCompanies.reduce((prevValue, currentValue) => {
+      return {
+        ...prevValue,
+        [currentValue.id]: currentValue.companyNameEnglish,
+      };
+    }, {});
+  }, [userCompanies]);
+
+  function closeCompanyModal() {
+    setIsCompanyModalOpen(false);
+    setCurrentCompany(undefined);
   }
 
-  function closeModal() {
-    setModalVisible(false);
+  function openCompanyModal(company: CompanyProperties) {
+    return () => {
+      setCurrentCompany(company);
+      setIsCompanyModalOpen(true);
+    };
   }
 
   const renderCompanyItem = useCallback(({ item: company }) => {
     return (
-      <TouchableOpacity onPress={openModal}>
+      <TouchableOpacity onPress={openCompanyModal(company)}>
         <List.Item
           style={styles.cardContainer}
-          title={company.name}
-          description={`@${company.handle}`}
+          title={company.companyNameEnglish}
+          description={company.industry}
           titleStyle={styles.companyName}
         />
       </TouchableOpacity>
@@ -58,9 +64,13 @@ export const UserCompaniesList = () => {
         />
       </View>
       <FullScreenSlidingModal
-        isVisible={modalVisible}
-        onCloseModal={closeModal}>
-        <></>
+        isVisible={isCompanyModalOpen}
+        onCloseModal={closeCompanyModal}>
+        <CompanyInfoProvider
+          currentCompany={currentCompany}
+          favouriteCompaniesIds={favCompaniesIds}>
+          <CompanyInfoContainer />
+        </CompanyInfoProvider>
       </FullScreenSlidingModal>
     </>
   );

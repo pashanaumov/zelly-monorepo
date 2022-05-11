@@ -33,7 +33,7 @@ function* loginUser(payload: LoginUserPayload) {
     Toast.showToast({
       type: 'error',
       text1: 'Error',
-      text2: e.message || '',
+      text2: 'Invalid credentials. Please try again',
     });
 
     console.log(e.message);
