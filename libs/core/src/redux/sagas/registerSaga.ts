@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 import { all, call, put, takeEvery } from 'redux-saga/effects';
-import { authService } from '../../services/authService';
+import { authService } from '@zelly/core/services/authService';
 import { UserResponse } from '../../types/Auth/LoginResponse';
 import { UserCountry } from '../../types/Utility/User';
 import { authUser } from '../authSlice';

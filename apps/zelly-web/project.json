@@ -67,6 +67,13 @@
         "jestConfig": "apps/zelly-web/jest.config.js",
         "passWithNoTests": true
       }
+    },
+    "deploy": {
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "cd dist/apps/zelly-web && cp ../../../apps/zelly-web/Dockerfile . && heroku container:login && heroku container:push web -a [appName] && heroku container:release web -a [appName]"
+      }
     }
   },
   "tags": []
