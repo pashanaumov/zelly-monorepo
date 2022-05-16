@@ -1,11 +1,11 @@
-import React from 'react';
 import { runFetchData } from '@zelly/core/redux/sagas/authSaga';
 import { AppDispatch, RootState } from '@zelly/core/redux/storeWeb';
 import { UserEmail, UserPassword } from '@zelly/core/types/Utility/User';
 import { useFormik } from 'formik';
+import React from 'react';
+import { Oval } from 'react-loader-spinner';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Header from '../Landing/partials/Header';
 
 export const LoginScreen = () => {
@@ -14,6 +14,8 @@ export const LoginScreen = () => {
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.authenticated,
   );
+
+  const isLoading = useSelector((state: RootState) => state.ui.showLoading);
 
   async function onLogin({
     email,
@@ -122,6 +124,14 @@ export const LoginScreen = () => {
                         className="btn text-white bg-blue-600 hover:bg-blue-700 w-full"
                         type="submit">
                         Sign in
+                        {isLoading && (
+                          <Oval
+                            height="24"
+                            width="24"
+                            color="white"
+                            ariaLabel="loading"
+                          />
+                        )}
                       </button>
                     </div>
                   </div>

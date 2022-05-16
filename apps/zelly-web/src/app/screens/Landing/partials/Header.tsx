@@ -1,10 +1,11 @@
 import { sagaActions } from '@zelly/core/redux/sagas/sagaActions';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { RootState } from '@zelly/core/redux/storeWeb';
 
 function Header() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [top, setTop] = useState(true);
 
@@ -21,6 +22,7 @@ function Header() {
 
   async function onLogout() {
     dispatch({ type: sagaActions.LOGOUT_USER });
+    navigate('/');
   }
 
   return (
