@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 import { all, call, put, takeEvery } from 'redux-saga/effects';
-import { authService } from '@zelly/core/services/authService';
+import { authService as AuthService } from '../../services/authService';
 import { UserResponse } from '../../types/Auth/LoginResponse';
 import { UserCountry } from '../../types/Utility/User';
 import { authUser } from '../authSlice';
@@ -14,7 +14,7 @@ export type RegisterUserPayload = LoginUserPayload & {
 };
 
 function* registerUser(payload: RegisterUserPayload) {
-  const { register } = authService();
+  const { register } = AuthService();
   yield put(toggleLoading(true));
   try {
     const user: UserResponse = yield call(() => register(payload));

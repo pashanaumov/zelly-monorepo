@@ -21,7 +21,6 @@
     "axios": "*",
     "react-native-screens": "*",
     "@react-navigation/native-stack": "*",
-    "@react-navigation/bottom-tabs'": "*",
     "formik": "*",
     "react-native-modal": "*",
     "@react-native-picker/picker": "*",
