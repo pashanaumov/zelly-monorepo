@@ -2,7 +2,9 @@ const path = require('path');
 const express = require('express');
 
 const app = express();
-const publicPath = path.join(__dirname, '../../dist', 'zelly-web');
+const publicPath = path.join(__dirname, '../../../dist/apps', 'zelly-web');
+
+console.log(publicPath);
 
 const port = process.env.PORT || 3000;
 
