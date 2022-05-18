@@ -1,6 +1,6 @@
-import { Platform } from 'react-native';
 import { all, call, put, takeEvery } from 'redux-saga/effects';
-import { authService as AuthService } from '../../services/authService';
+import Toast from '../../components/Toast';
+import { authService } from '../../services/authService';
 import { UserResponse } from '../../types/Auth/LoginResponse';
 import { UserCountry } from '../../types/Utility/User';
 import { authUser } from '../authSlice';
@@ -14,7 +14,7 @@ export type RegisterUserPayload = LoginUserPayload & {
 };
 
 function* registerUser(payload: RegisterUserPayload) {
-  const { register } = AuthService();
+  const { register } = authService();
   yield put(toggleLoading(true));
   try {
     const user: UserResponse = yield call(() => register(payload));
@@ -25,11 +25,11 @@ function* registerUser(payload: RegisterUserPayload) {
     }
   } catch (e: any) {
     yield put(toggleLoading(false));
-
-    if (Platform.OS !== 'web') {
-      // @TODO: CHANGE
-      // Toast.showToast("error", "Error", e.message || "");
-    }
+    Toast.showToast({
+      type: 'error',
+      text1: 'Error',
+      text2: 'Error registering',
+    });
     console.log(e);
   }
 }
