@@ -14,7 +14,7 @@ export type RegisterUserPayload = LoginUserPayload & {
 };
 
 function* registerUser(payload: RegisterUserPayload) {
-  const { register } = authService();
+  const { register } = authService;
   yield put(toggleLoading(true));
   try {
     const user: UserResponse = yield call(() => register(payload));

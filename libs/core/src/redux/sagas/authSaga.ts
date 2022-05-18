@@ -17,7 +17,7 @@ export type LoginUserPayload = {
 
 function* loginUser(payload: LoginUserPayload) {
   const { email, password } = payload;
-  const { login } = authService();
+  const { login } = authService;
   yield put(toggleLoading(true));
   try {
     const user: UserResponse = yield call(() => login(email, password));
