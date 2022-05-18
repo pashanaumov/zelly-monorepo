@@ -20,7 +20,6 @@
           "apps/zelly-web/src/assets"
         ],
         "styles": ["apps/zelly-web/src/styles/styles.scss"],
-        "scripts": [],
         "webpackConfig": "@nrwl/react/plugins/webpack"
       },
       "configurations": {
