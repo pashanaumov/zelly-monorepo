@@ -6,54 +6,59 @@ import { AppDispatch } from '@zelly/core/redux/storeNative';
 import { useFormik } from 'formik';
 import React, { memo, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import SelectDropdown from 'react-native-select-dropdown';
 import { useDispatch } from 'react-redux';
 import Background from '../../components/Common/Background';
 import Button from '../../components/Common/Button/Button';
 import Header from '../../components/Common/Header';
 import Logo from '../../components/Common/Logo';
 import TextInput from '../../components/Common/TextInput';
+import { countryList } from '../../data/countriesList';
 import { Navigation } from '../../Types';
 import { theme } from '../../ui/theme';
-import {
-  countryValidator,
-  emailValidator,
-  passwordValidator,
-} from '../../ui/utils';
+import { emailValidator, passwordValidator } from '../../ui/utils';
 
 type Props = {
   navigation: Navigation;
 };
+
+const ageRanges = [
+  '12-17',
+  '18-24',
+  '25-34',
+  '35-44',
+  '45-54',
+  '55-64',
+  '65-74',
+  '75+',
+];
 
 const RegisterScreen = ({ navigation }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const [_email, setEmail] = useState({ error: '' });
   const [_password, setPassword] = useState({ error: '' });
-  const [_country, setCountry] = useState({ error: '' });
+  const [country, setCountry] = useState('');
+  const [ageRange, setAgeRange] = useState('');
 
   const _onSignUpPressed = (
     email: string,
     password: string,
-    country: string,
     successCb: () => void,
   ) => {
     const emailError = emailValidator(email);
     const passwordError = passwordValidator(password);
-    const countryError = countryValidator(country);
 
-    if (emailError || passwordError || countryError) {
+    if (emailError || passwordError) {
       setEmail({ error: emailError });
       setPassword({ error: passwordError });
-      setCountry({
-        error: countryError,
-      });
       return;
     }
     successCb();
   };
 
   function onRegister(data: Omit<RegisterUserPayload, 'type'>) {
-    _onSignUpPressed(data.email, data.password, data.country, () =>
+    _onSignUpPressed(data.email, data.password, () =>
       dispatch(runRegisterUser(data)),
     );
   }
@@ -66,14 +71,15 @@ const RegisterScreen = ({ navigation }: Props) => {
     initialValues: {
       email: '',
       password: '',
-      country: '',
     },
     onSubmit: (_values) => {
-      onRegister(_values);
+      onRegister({ ..._values, ageRange, country });
     },
   });
 
-  const { email, password, country } = values;
+  const { email, password } = values;
+
+  const isButtonDisabled = !email || !password || !ageRange || !country;
 
   return (
     <Background>
@@ -95,15 +101,6 @@ const RegisterScreen = ({ navigation }: Props) => {
       />
 
       <TextInput
-        label="Country"
-        returnKeyType="done"
-        value={country}
-        onChangeText={handleChange('country')}
-        error={!!_country.error}
-        errorText={_country.error}
-      />
-
-      <TextInput
         label="Password"
         returnKeyType="done"
         value={password}
@@ -111,9 +108,46 @@ const RegisterScreen = ({ navigation }: Props) => {
         error={!!_password.error}
         errorText={_password.error}
         secureTextEntry
+        style={styles.bottomTextInput}
       />
 
-      <Button mode="contained" onPress={handleSubmit} style={styles.button}>
+      <SelectDropdown
+        data={countryList}
+        onSelect={(selectedItem) => {
+          setCountry(selectedItem);
+        }}
+        buttonTextAfterSelection={(selectedItem) => {
+          return selectedItem;
+        }}
+        rowTextForSelection={(item) => {
+          return item;
+        }}
+        defaultButtonText={'Country'}
+        buttonStyle={styles.buttonContainer}
+        buttonTextStyle={styles.buttonTextColor}
+      />
+
+      <SelectDropdown
+        data={ageRanges}
+        onSelect={(selectedItem) => {
+          setAgeRange(selectedItem);
+        }}
+        buttonTextAfterSelection={(selectedItem) => {
+          return selectedItem;
+        }}
+        rowTextForSelection={(item) => {
+          return item;
+        }}
+        defaultButtonText={'Age range'}
+        buttonStyle={styles.buttonContainer}
+        buttonTextStyle={styles.buttonTextColor}
+      />
+
+      <Button
+        disabled={isButtonDisabled}
+        mode="contained"
+        onPress={handleSubmit}
+        style={styles.button}>
         Sign Up
       </Button>
 
@@ -157,6 +191,20 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     width: '100%',
+  },
+  buttonContainer: {
+    borderWidth: 1,
+    width: '100%',
+    marginBottom: 12,
+    borderRadius: 4,
+    backgroundColor: 'white',
+  },
+  buttonTextColor: {
+    color: '#414757',
+  },
+  bottomTextInput: {
+    marginTop: -16,
+    marginBottom: 16,
   },
 });
 

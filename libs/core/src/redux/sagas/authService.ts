@@ -26,7 +26,7 @@ export const authService = {
   },
 
   register(body: RegisterRequestBody) {
-    const { email, password, country } = body;
+    const { email, password, country, ageRange } = body;
     const { setItem } = useAsyncStorage('user');
     const { POST } = apiService();
 
@@ -34,6 +34,7 @@ export const authService = {
       email,
       password,
       country,
+      ageRange,
     }).then((response) => {
       if (response.token) {
         setItem(response.token);

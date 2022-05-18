@@ -2,7 +2,7 @@ import { all, call, put, takeEvery } from 'redux-saga/effects';
 import Toast from '../../components/Toast';
 import { authService } from './authService';
 import { UserResponse } from '../../types/Auth/LoginResponse';
-import { UserCountry } from '../../types/Utility/User';
+import { UserAgeRange, UserCountry } from '../../types/Utility/User';
 import { authUser } from '../authSlice';
 import { toggleLoading } from '../ui/uiSlice';
 import { setUser } from '../userSlice';
@@ -11,6 +11,7 @@ import { sagaActions } from './sagaActions';
 
 export type RegisterUserPayload = LoginUserPayload & {
   country: UserCountry;
+  ageRange: UserAgeRange;
 };
 
 function* registerUser(payload: RegisterUserPayload) {
@@ -39,12 +40,21 @@ export function* watchRegisterUser() {
 }
 
 export function runRegisterUser(payload: Omit<RegisterUserPayload, 'type'>) {
-  const { email, password, country } = payload;
+  const { email, password, country, ageRange } = payload;
+  console.log('registerUser', {
+    type: sagaActions.REGISTER_USER,
+    email,
+    password,
+    country,
+    ageRange,
+  });
+
   return {
     type: sagaActions.REGISTER_USER,
     email,
     password,
     country,
+    ageRange,
   };
 }
 

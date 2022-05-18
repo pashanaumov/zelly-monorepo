@@ -34,3 +34,11 @@ export const countryValidator = (country: string) => {
 
   return '';
 };
+
+export const ageRangeValidator = (ageRange: string) => {
+  if (!ageRange || ageRange.length <= 0) {
+    return 'Age range cannot be empty.';
+  }
+
+  return '';
+};
