@@ -1,8 +1,8 @@
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
-import { UserEmail, UserPassword } from '../types/Utility/User';
-import { RegisterRequestBody, UserResponse } from '../types/Auth/LoginResponse';
-import { apiService } from './apiService';
-import { zellyUrls } from '../Urls';
+import { UserEmail, UserPassword } from '../../types/Utility/User';
+import { RegisterRequestBody, UserResponse } from '../../types/Auth/LoginResponse';
+import { apiService } from '../../services/apiService';
+import { zellyUrls } from '../../Urls';
 
 const loginUrl = `https://zelly-server.herokuapp.com/auth/login`;
 const registerUrl = `https://zelly-server.herokuapp.com/auth/register`;

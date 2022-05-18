@@ -1,6 +1,6 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 import Toast from '../../components/Toast';
-import { authService } from '../../services/authService';
+import { authService } from './authService';
 import { UserResponse } from '../../types/Auth/LoginResponse';
 import { UserCountry } from '../../types/Utility/User';
 import { authUser } from '../authSlice';
