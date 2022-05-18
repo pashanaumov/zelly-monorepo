@@ -1,27 +1,24 @@
+import {
+  RegisterUserPayload,
+  runRegisterUser,
+} from '@zelly/core/redux/sagas/registerSaga';
+import { AppDispatch } from '@zelly/core/redux/storeNative';
+import { useFormik } from 'formik';
 import React, { memo, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Modal from 'react-native-modal';
-import { Picker } from '@react-native-picker/picker';
 import { useDispatch } from 'react-redux';
-import { useFormik } from 'formik';
 import Background from '../../components/Common/Background';
-import Logo from '../../components/Common/Logo';
-import Header from '../../components/Common/Header';
 import Button from '../../components/Common/Button/Button';
+import Header from '../../components/Common/Header';
+import Logo from '../../components/Common/Logo';
 import TextInput from '../../components/Common/TextInput';
-import { theme } from '../../ui/theme';
 import { Navigation } from '../../Types';
+import { theme } from '../../ui/theme';
 import {
   countryValidator,
   emailValidator,
   passwordValidator,
 } from '../../ui/utils';
-import { UserLanguage } from '@zelly/core/types/Utility/User';
-import { AppDispatch } from '@zelly/core/redux/storeNative';
-import {
-  RegisterUserPayload,
-  runRegisterUser,
-} from '@zelly/core/redux/sagas/registerSaga';
 
 type Props = {
   navigation: Navigation;
@@ -33,8 +30,6 @@ const RegisterScreen = ({ navigation }: Props) => {
   const [_email, setEmail] = useState({ error: '' });
   const [_password, setPassword] = useState({ error: '' });
   const [_country, setCountry] = useState({ error: '' });
-
-  const [showModal, setShowModal] = useState<boolean>(false);
 
   const _onSignUpPressed = (
     email: string,
@@ -74,15 +69,9 @@ const RegisterScreen = ({ navigation }: Props) => {
       country: '',
     },
     onSubmit: (_values) => {
-      if (language) {
-        onRegister({ ..._values, language });
-      }
+      onRegister(_values);
     },
   });
-
-  function toggleModal() {
-    setShowModal((prev) => !prev);
-  }
 
   const { email, password, country } = values;
 
@@ -134,26 +123,6 @@ const RegisterScreen = ({ navigation }: Props) => {
           <Text style={styles.link}>Login</Text>
         </TouchableOpacity>
       </View>
-
-      {showModal && (
-        <Modal isVisible={showModal}>
-          <View style={styles.modalContainer}>
-            <View>
-              <Picker selectedValue={language} onValueChange={setLanguage}>
-                <Picker.Item label="English" value="ENG" />
-                <Picker.Item label="Русский" value="RU" />
-              </Picker>
-
-              <Button
-                mode="contained"
-                onPress={toggleModal}
-                style={styles.button}>
-                Close
-              </Button>
-            </View>
-          </View>
-        </Modal>
-      )}
     </Background>
   );
 };

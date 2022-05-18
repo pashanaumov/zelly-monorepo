@@ -1,5 +1,11 @@
 import React, { memo, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Keyboard,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import { AppDispatch } from '@zelly/core/redux/storeNative';
@@ -63,6 +69,7 @@ const LoginScreen = ({ navigation }: Props) => {
       password: '',
     },
     onSubmit: async (_values) => {
+      Keyboard.dismiss();
       await onLogin({ ..._values });
     },
   });

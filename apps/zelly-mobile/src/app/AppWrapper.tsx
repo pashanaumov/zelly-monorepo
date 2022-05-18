@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { PersistGate } from 'redux-persist/integration/react';
 import { App } from './App';
+import { theme } from '../ui/theme';
 
 const queryClient = new QueryClient();
 
@@ -16,7 +17,7 @@ export const AppWrapper = () => (
     <NavigationContainer>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <PaperProvider>
+          <PaperProvider theme={theme}>
             <QueryClientProvider client={queryClient}>
               <App />
             </QueryClientProvider>
