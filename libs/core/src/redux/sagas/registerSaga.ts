@@ -41,13 +41,6 @@ export function* watchRegisterUser() {
 
 export function runRegisterUser(payload: Omit<RegisterUserPayload, 'type'>) {
   const { email, password, country, ageRange } = payload;
-  console.log('registerUser', {
-    type: sagaActions.REGISTER_USER,
-    email,
-    password,
-    country,
-    ageRange,
-  });
 
   return {
     type: sagaActions.REGISTER_USER,

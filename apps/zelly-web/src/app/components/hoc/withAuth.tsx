@@ -1,4 +1,4 @@
-import React, { ComponentType, FC, useCallback, useEffect } from 'react';
+import { ComponentType, FC, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@zelly/core/redux/storeWeb';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -9,29 +9,36 @@ export const withAuth =
     const location = useLocation();
     const navigate = useNavigate();
 
-    const userToken = useSelector(
-      (state: RootState) => state.auth.authenticated,
-    );
     const fetchedToken = useSelector(
       (state: RootState) => state.user.user?.token,
     );
 
-    const isAtRouteToRedirect =
-      location.pathname === '/login' || location.pathname === '/register';
+    const isAtMainPage = location.pathname === '/';
 
     const shouldNavigateAway = useCallback(() => {
       const { pathname } = location;
-      if (!userToken && pathname !== '/login' && pathname !== '/register') {
+
+      if (!fetchedToken && pathname !== '/login' && pathname !== '/register') {
         navigate('/', { replace: true });
       }
-      if (userToken && isAtRouteToRedirect) {
-        navigate('/', { replace: true });
+      if (fetchedToken && pathname === '/login') {
+        navigate('/dashboard', { replace: true });
+      }
+      if (fetchedToken && pathname === '/register') {
+        navigate('/dashboard', { replace: true });
+      }
+      if (fetchedToken && isAtMainPage) {
+        navigate('/dashboard', { replace: true });
       }
     }, []);
 
     useEffect(() => {
       shouldNavigateAway();
-    }, [shouldNavigateAway, userToken, fetchedToken]);
+    }, [shouldNavigateAway, fetchedToken]);
+
+    useEffect(() => {
+      shouldNavigateAway();
+    }, []);
 
     return <Component {...(props as P)} />;
   };

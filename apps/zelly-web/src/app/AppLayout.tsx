@@ -37,8 +37,6 @@ export function AppLayout({ children }: PropsWithChildren<{}>) {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const userToken = useSelector((state: RootState) => state.auth.authenticated);
-
   const removeHeader =
     location.pathname === '/login' || location.pathname === '/register';
 

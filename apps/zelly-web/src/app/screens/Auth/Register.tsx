@@ -1,29 +1,39 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '@zelly/core/redux/storeWeb';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@zelly/core/redux/storeWeb';
 import { UserLanguage } from '@zelly/core/types/Utility/User';
 import {
   RegisterUserPayload,
   runRegisterUser,
 } from '@zelly/core/redux/sagas/registerSaga';
 import {
-  SelectMenu,
   SelectOption,
 } from '../../components/common/SelectMenu/SelectMenu';
 import { Link } from 'react-router-dom';
 import Header from '../Landing/partials/Header';
-
-const LanguageOptions: SelectOption<UserLanguage>[] = ['RU', 'ENG'];
+import Select from "../../components/common/Select/Select";
+import { Oval } from 'react-loader-spinner';
 
 export const RegisterScreen = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const isLoading = useSelector((state: RootState) => state.ui.showLoading);
 
-  const [language, setLanguage] = useState<UserLanguage | ''>('');
+  const ageRanges = [
+    '12-17',
+    '18-24',
+    '25-34',
+    '35-44',
+    '45-54',
+    '55-64',
+    '65-74',
+    '75+',
+  ];
+
+  const [currentAgeRange, setCurrentAgeRange] = useState(ageRanges[0]);
 
   function onRegister(data: Omit<RegisterUserPayload, 'type'>) {
-    console.log(data);
     dispatch(runRegisterUser(data));
   }
 
@@ -34,7 +44,7 @@ export const RegisterScreen = () => {
       country: '',
     },
     onSubmit: (_values) => {
-      onRegister({ ..._values });
+      onRegister({ ..._values, ageRange: currentAgeRange });
     },
   });
 
@@ -102,6 +112,23 @@ export const RegisterScreen = () => {
                       <div className="w-full px-3">
                         <label
                           className="block text-gray-800 text-sm font-medium mb-1"
+                          htmlFor="ageRange">
+                          Age range <span className="text-red-600">*</span>
+                        </label>
+                            <Select
+                              //className="flex-1"
+                              options={ageRanges}
+                              selectedOption={currentAgeRange}
+                              handleChange={(event: any) => {
+                                setCurrentAgeRange(event);
+                              }}
+                            />
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap -mx-3 mb-4">
+                      <div className="w-full px-3">
+                        <label
+                          className="block text-gray-800 text-sm font-medium mb-1"
                           htmlFor="password">
                           Password <span className="text-red-600">*</span>
                         </label>
@@ -124,6 +151,14 @@ export const RegisterScreen = () => {
                           type="submit"
                           className="btn text-white bg-blue-600 hover:bg-blue-700 w-full">
                           Sign up
+                          {isLoading && (
+                            <Oval
+                              height="24"
+                              width="24"
+                              color="white"
+                              ariaLabel="loading"
+                            />
+                          )}
                         </button>
                       </div>
                     </div>
