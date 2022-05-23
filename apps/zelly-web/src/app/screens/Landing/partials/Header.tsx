@@ -1,12 +1,14 @@
 import { sagaActions } from '@zelly/core/redux/sagas/sagaActions';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { RootState } from '@zelly/core/redux/storeWeb';
 
 function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+
   const [top, setTop] = useState(true);
 
   const userToken = useSelector((state: RootState) => state.auth.authenticated);
@@ -24,6 +26,8 @@ function Header() {
     dispatch({ type: sagaActions.LOGOUT_USER });
     navigate('/');
   }
+
+  const isAtDashboard = location.pathname === '/dashboard';
 
   return (
     <header
@@ -94,28 +98,28 @@ function Header() {
               </ul>
             ) : (
               <ul className="flex flex-grow justify-end flex-wrap items-center">
+                {!isAtDashboard && (
+                  <li>
+                    <Link
+                      to="/dashboard"
+                      className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-0 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                      <span>Dashboard</span>
+                    </Link>
+                  </li>
+                )}
                 <li>
                   <Link
-                    to="/dashboard"
-                    className="btn-sm text-gray-200 bg-gray-900 hover:bg-gray-800 ml-3">
-                    <span>Dashboard</span>
-                    <svg
-                      className="w-3 h-3 fill-current text-gray-400 flex-shrink-0 ml-2 -mr-1"
-                      viewBox="0 0 12 12"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z"
-                        fillRule="nonzero"
-                      />
-                    </svg>
+                    to="/profile"
+                    className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-0 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                    <span>Profile</span>
                   </Link>
                 </li>
                 <li>
-                  <button
+                  <a
                     onClick={onLogout}
-                    className="btn-sm text-gray-200 bg-gray-900 hover:bg-gray-800 ml-3">
+                    className="text-white bg-gradient-to-br cursor-pointer from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-0 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                     Logout
-                  </button>
+                  </a>
                 </li>
               </ul>
             )}

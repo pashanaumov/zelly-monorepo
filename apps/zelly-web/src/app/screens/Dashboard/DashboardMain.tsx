@@ -14,20 +14,7 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-const stats = [
-  { label: '１', value: 'Personal Data' },
-  { label: '𝟸', value: 'Personal Data' },
-  { label: '３', value: 'Personal Data' },
-];
-
 const actions = [
-  {
-    icon: CalculatorIcon,
-    name: 'Calculate footprint',
-    href: '#',
-    iconForeground: 'text-teal-700',
-    iconBackground: 'bg-teal-50',
-  },
   {
     icon: InformationCircleIcon,
     name: 'Companies',
@@ -36,16 +23,23 @@ const actions = [
     iconBackground: 'bg-purple-50',
   },
   {
+    icon: CalculatorIcon,
+    name: 'Calculate footprint',
+    href: '/calculator',
+    iconForeground: 'text-teal-700',
+    iconBackground: 'bg-teal-50',
+  },
+  {
     icon: ChatIcon,
     name: 'Forums and discussions',
-    href: '#',
+    href: '/forums',
     iconForeground: 'text-sky-700',
     iconBackground: 'bg-sky-50',
   },
   {
     icon: TrendingUpIcon,
     name: 'User trends',
-    href: '#',
+    href: '/trends',
     iconForeground: 'text-yellow-700',
     iconBackground: 'bg-yellow-50',
   },
@@ -76,7 +70,14 @@ const announcements = [
 ];
 
 export const DashboardMain = () => {
-  const { username } = useUserInfo();
+  const { username, country } = useUserInfo();
+
+  const stats = [
+    { label: '1kg', value: 'CO₂ in 2022' },
+    { label: 'Top 10', value: 'Your rating: ' },
+    { label: country, value: 'Your country: ' },
+  ];
+
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
       <h1 className="sr-only">Profile</h1>
@@ -103,11 +104,12 @@ export const DashboardMain = () => {
                       <p className="text-xl font-bold text-gray-900 sm:text-2xl">
                         {username}
                       </p>
-                      <p className="text-sm font-medium text-gray-600">
-                        <p>
-                          CO<sub>2</sub> с начала года: 20кг
-                        </p>
-                      </p>
+
+                      <Link to={'/calculator'}>
+                        <span className="text-sm font-medium relative transition-all ease-in cursor-pointer outline-none duration-75 bg-white rounded-md text-indigo-500 hover:text-indigo-700 group-hover:bg-opacity-0">
+                          Calculate your first footprint
+                        </span>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -158,7 +160,7 @@ export const DashboardMain = () => {
                   <div className="mt-8">
                     <h3 className="text-lg font-medium">
                       <Link to={action.href}>
-                        <a href={'#'} className="focus:outline-none">
+                        <a className="focus:outline-none">
                           {/* Extend touch target to entire panel */}
                           <span
                             className="absolute inset-0"
@@ -194,6 +196,30 @@ export const DashboardMain = () => {
         {/* Right column */}
         <div className="grid grid-cols-1 gap-4">
           {/* Announcements */}
+
+          {/* Компании за которыми Вы следите */}
+          <section aria-labelledby="recent-hires-title">
+            <div className="rounded-lg bg-white overflow-hidden shadow">
+              <div className="p-6">
+                <h2
+                  className="text-base font-medium text-gray-900"
+                  id="recent-hires-title">
+                  You follow
+                </h2>
+                <UserFollowingCompaniesWidget />
+                <div className="mt-6">
+                  <Link
+                    to={'/companies'}
+                    className="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                    View all
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </section>
+          {/**
+           * Last footprint calculations
+           */}
           <section aria-labelledby="announcements-title">
             <div className="rounded-lg bg-white overflow-hidden shadow">
               <div className="p-6">
@@ -234,27 +260,6 @@ export const DashboardMain = () => {
                       className="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
                       View all
                     </a>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Компании за которыми Вы следите */}
-          <section aria-labelledby="recent-hires-title">
-            <div className="rounded-lg bg-white overflow-hidden shadow">
-              <div className="p-6">
-                <h2
-                  className="text-base font-medium text-gray-900"
-                  id="recent-hires-title">
-                  You follow
-                </h2>
-                <UserFollowingCompaniesWidget />
-                <div className="mt-6">
-                  <Link
-                    to={'/companies'}
-                    className="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                    View all
                   </Link>
                 </div>
               </div>
