@@ -13,11 +13,7 @@ export const withAuth =
       (state: RootState) => state.user.user?.token,
     );
 
-    console.log({ fetchedToken });
-
     const isAtMainPage = location.pathname === '/';
-
-    console.log({ isAtMainPage, fetchedToken });
 
     const shouldNavigateAway = useCallback(() => {
       const { pathname } = location;
