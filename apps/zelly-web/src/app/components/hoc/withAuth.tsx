@@ -13,7 +13,11 @@ export const withAuth =
       (state: RootState) => state.user.user?.token,
     );
 
+    console.log({ fetchedToken });
+
     const isAtMainPage = location.pathname === '/';
+
+    console.log({ isAtMainPage, fetchedToken });
 
     const shouldNavigateAway = useCallback(() => {
       const { pathname } = location;
@@ -28,17 +32,14 @@ export const withAuth =
         navigate('/dashboard', { replace: true });
       }
       if (fetchedToken && isAtMainPage) {
+        console.log('i think i better change');
         navigate('/dashboard', { replace: true });
       }
-    }, []);
+    }, [fetchedToken, isAtMainPage]);
 
     useEffect(() => {
       shouldNavigateAway();
-    }, [shouldNavigateAway, fetchedToken]);
-
-    useEffect(() => {
-      shouldNavigateAway();
-    }, []);
+    }, [fetchedToken, shouldNavigateAway]);
 
     return <Component {...(props as P)} />;
   };
