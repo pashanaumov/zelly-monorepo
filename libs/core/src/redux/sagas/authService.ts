@@ -1,5 +1,5 @@
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
-import { UserEmail, UserPassword } from '../../types/Utility/User';
+import { UserEmail, UserPassword, UserPasswords } from '../../types/Utility/User';
 import { RegisterRequestBody, UserResponse } from '../../types/Auth/LoginResponse';
 import { apiService } from '../../services/apiService';
 import { zellyUrls } from '../../Urls';
@@ -53,5 +53,21 @@ export const authService = {
       .catch((e) => {
         console.log(e);
       });
+  },
+
+  async changeUserPassword({ oldPassword, newPassword }: UserPasswords) {
+    const { PUT } = apiService();
+
+    return await PUT<{
+      error: boolean;
+      description: string;
+      user: UserResponse;
+    }>(zellyUrls.changePassword, { oldPassword, newPassword });
+  },
+
+  async changeUserEmail(userEmail: UserEmail) {
+    const { PUT } = apiService();
+
+    return await PUT<UserResponse>(zellyUrls.changeEmail, { email: userEmail });
   },
 };

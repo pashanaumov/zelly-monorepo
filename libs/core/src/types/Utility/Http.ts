@@ -6,6 +6,7 @@ export enum HttpMethod {
   GET = 'GET',
   POST = 'POST',
   PATCH = 'PATCH',
+  PUT = 'PUT'
 }
 
 export type FetchMethod<T = HttpMethod, K = string> = { [K in keyof T]: T[K] };

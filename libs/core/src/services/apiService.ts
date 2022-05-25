@@ -49,9 +49,14 @@ export function apiService() {
     return fetchData<T>(route, HttpMethod.PATCH, body, headers);
   }
 
+  function PUT<T>(route: Url, body: RequestBody<any>, headers: AxiosRequestHeaders | null = null) {
+    return fetchData<T>(route, HttpMethod.PUT, body, headers);
+  }
+
   return {
     GET,
     PATCH,
     POST,
+    PUT,
   };
 }

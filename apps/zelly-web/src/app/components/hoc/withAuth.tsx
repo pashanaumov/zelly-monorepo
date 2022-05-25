@@ -28,10 +28,9 @@ export const withAuth =
         navigate('/dashboard', { replace: true });
       }
       if (fetchedToken && isAtMainPage) {
-        console.log('i think i better change');
         navigate('/dashboard', { replace: true });
       }
-    }, [fetchedToken, isAtMainPage]);
+    }, [fetchedToken, isAtMainPage, location, navigate]);
 
     useEffect(() => {
       shouldNavigateAway();

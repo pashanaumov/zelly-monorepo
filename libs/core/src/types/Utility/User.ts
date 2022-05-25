@@ -6,3 +6,8 @@ export type UserLanguage = 'RU' | 'ENG';
 export type UserId = string;
 export type UserToken = string;
 export type UserAgeRange = string;
+
+export type UserPasswords = {
+  oldPassword: UserPassword;
+  newPassword: UserPassword;
+};

@@ -91,7 +91,7 @@ export const CompanyInformationModal: FC<Props> = ({
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
         as="div"
-        className="fixed inset-0 overflow-hidden"
+        className="fixed inset-0 overflow-hidden z-30"
         onClose={setIsCompanyModalOpen}>
         <div className="absolute inset-0 overflow-hidden">
           <Dialog.Overlay className="bg-zinc-900/80 absolute inset-0" />
