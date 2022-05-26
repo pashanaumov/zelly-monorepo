@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { RootState } from '@zelly/core/redux/storeWeb';
 
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(' ');
+}
+
 function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -102,7 +106,23 @@ function Header() {
                   <li>
                     <Link
                       to="/dashboard"
-                      className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-0 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                      className={classNames(
+                        top ? 'text-white' : 'text-red-400',
+                        'bg-transparent',
+                        'hover:bg-gradient-to-bl',
+                        'focus:ring-0',
+                        'focus:outline-none',
+                        'focus:ring-blue-300',
+                        'dark:focus:ring-blue-800',
+                        'font-medium',
+                        'rounded-lg',
+                        'text-sm',
+                        'px-5',
+                        'py-2.5',
+                        'text-center',
+                        'mr-2',
+                        'mb-2',
+                      )}>
                       <span>Dashboard</span>
                     </Link>
                   </li>
@@ -110,14 +130,47 @@ function Header() {
                 <li>
                   <Link
                     to="/profile"
-                    className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-0 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                    className={classNames(
+                      top ? 'text-white' : 'text-blue-500',
+                      'bg-transparent',
+                      'hover:text-blue-700',
+                      'focus:ring-0',
+                      'focus:outline-none',
+                      'focus:ring-blue-300',
+                      'dark:focus:ring-blue-800',
+                      'font-medium',
+                      'rounded-lg',
+                      'text-sm',
+                      'px-5',
+                      'py-2.5',
+                      'text-center',
+                      'mr-2',
+                      'mb-2',
+                    )}>
                     <span>Profile</span>
                   </Link>
                 </li>
                 <li>
                   <a
                     onClick={onLogout}
-                    className="text-white bg-gradient-to-br cursor-pointer from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-0 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                    className={classNames(
+                      top ? 'text-white' : 'text-blue-500',
+                      'bg-transparent',
+                      'hover:text-blue-700',
+                      'focus:ring-0',
+                      'focus:outline-none',
+                      'focus:ring-blue-300',
+                      'dark:focus:ring-blue-800',
+                      'font-medium',
+                      'rounded-lg',
+                      'text-sm',
+                      'px-5',
+                      'py-2.5',
+                      'text-center',
+                      'mr-2',
+                      'mb-2',
+                      'cursor-pointer',
+                    )}>
                     Logout
                   </a>
                 </li>

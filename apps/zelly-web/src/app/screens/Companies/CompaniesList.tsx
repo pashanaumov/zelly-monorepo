@@ -1,12 +1,7 @@
 import { LoadingPlaceholder } from '@zelly/core/components/LoadingPlaceholder';
 import { useFetchCompanies } from '@zelly/core/queries/useFetchCompanies';
-import { useFollowCompany } from '@zelly/core/queries/useFollowCompany';
-import { useUnfollowCompany } from '@zelly/core/queries/useUnfollowCompany';
 import { useUserCompanies } from '@zelly/core/queries/useUserCompanies';
-import {
-  CompanyId,
-  CompanyProperties,
-} from '@zelly/core/types/Companies/Company';
+import { CompanyProperties } from '@zelly/core/types/Companies/Company';
 import React, { useMemo, useState } from 'react';
 import { CompanyInformationModal } from './CompanyInformationModal';
 import { AddToFavouritesButton } from './components/AddToFavouritesButton';
@@ -17,9 +12,6 @@ export const CompaniesList = () => {
 
   const { data: favouriteCompanies } = useUserCompanies();
   const { isLoading, data } = useFetchCompanies();
-
-  const { mutateFollow, isMutationLoading } = useFollowCompany();
-  const { mutateUnfollow, isMutationUnfollowLoading } = useUnfollowCompany();
 
   const favCompaniesIds = useMemo(() => {
     if (!favouriteCompanies) {
@@ -34,14 +26,6 @@ export const CompaniesList = () => {
   }, [favouriteCompanies]);
 
   const hasFavouriteCompanies = Object.keys(favCompaniesIds).length;
-
-  function addToFavorites(companyId: CompanyId) {
-    mutateFollow(companyId);
-  }
-
-  function removeFromFavorites(companyId: CompanyId) {
-    mutateUnfollow(companyId);
-  }
 
   function showCompanyModal(company: CompanyProperties) {
     setCurrentCompany(company);
@@ -121,12 +105,8 @@ export const CompaniesList = () => {
                           </td>
                           <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                             <AddToFavouritesButton
-                              isLoading={
-                                isMutationLoading || isMutationUnfollowLoading
-                              }
+                              key={company.id}
                               companyId={company.id}
-                              onAddToFavourites={addToFavorites}
-                              onRemoveFromFavorites={removeFromFavorites}
                               isFavourite={Boolean(
                                 hasFavouriteCompanies &&
                                   company.id in favCompaniesIds,
