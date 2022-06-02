@@ -1,31 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useFetchHomePage } from '@zelly/core/queries/web/homepage/useFetchHomepage';
+import React, { useState } from 'react';
 import Modal from '../../../../utils/Modal';
 
 import HeroImage from '../../../../images/hero-image.png';
 
 function HeroHome() {
-  const { isLoading, data, error, refetch } = useFetchHomePage();
   const [videoModalOpen, setVideoModalOpen] = useState(false);
-
-  useEffect(() => {
-    console.log(data.data);
-  }, [data]);
-
-  function displayData() {
-    return fetch('http://localhost:1337/api/zelly-web-main-page', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization:
-          'Bearer 90a2cadce96c4c7dee5cdff88477b24f40e4913a85bf97690efe610dba457c9b324e931fb07ac051e64227e01225c1bea063a0432a5956f23709c5065e1cdfeff21e46d263505fd4caa4996e99f675c623e7a5a4480d83fa282dfc770bc7d864320ff4c9698da35ee0b8eb1423c163e6d231a6483c2d06c53ff56427a7a498f5',
-      },
-    }).then((response) => response.json());
-  }
-
-  if (!data) {
-    return <></>;
-  }
 
   return (
     <section className="relative">
@@ -65,7 +44,10 @@ function HeroHome() {
             <h1
               className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4"
               data-aos="zoom-y-out">
-              {data.data.attributes.landing_page_title}
+              Make your website{' '}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
+                wonderful
+              </span>
             </h1>
             <div className="max-w-3xl mx-auto">
               <p
@@ -81,8 +63,8 @@ function HeroHome() {
                 data-aos-delay="300">
                 <div>
                   <a
-                    onClick={displayData}
-                    className="btn text-white bg-blue-600 hover:bg-blue-700 w-full mb-4 sm:w-auto sm:mb-0 cursor-pointer">
+                    className="btn text-white bg-blue-600 hover:bg-blue-700 w-full mb-4 sm:w-auto sm:mb-0"
+                    href="#0">
                     Start free trial
                   </a>
                 </div>

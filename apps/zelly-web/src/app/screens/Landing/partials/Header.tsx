@@ -107,9 +107,9 @@ function Header() {
                     <Link
                       to="/dashboard"
                       className={classNames(
-                        top ? 'text-white' : 'text-red-400',
+                        top ? 'text-white' : 'text-blue-500',
                         'bg-transparent',
-                        'hover:bg-gradient-to-bl',
+                        'hover:text-blue-700',
                         'focus:ring-0',
                         'focus:outline-none',
                         'focus:ring-blue-300',
@@ -122,6 +122,7 @@ function Header() {
                         'text-center',
                         'mr-2',
                         'mb-2',
+                        'cursor-pointer',
                       )}>
                       <span>Dashboard</span>
                     </Link>
@@ -146,6 +147,7 @@ function Header() {
                       'text-center',
                       'mr-2',
                       'mb-2',
+                      'cursor-pointer',
                     )}>
                     <span>Profile</span>
                   </Link>
