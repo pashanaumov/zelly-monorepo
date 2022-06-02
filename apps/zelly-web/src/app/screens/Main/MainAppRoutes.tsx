@@ -10,6 +10,7 @@ import { DashboardMain } from '../Dashboard/DashboardMain';
 import { Settings } from '../Settings/Settings';
 import { MainContent } from './MainContent';
 import { UserTrends } from '../Dashboard/UserTrends';
+import { MyCompanies } from '../Companies/MyCompanies/MyCompanies';
 
 function About() {
   return (
@@ -30,6 +31,7 @@ export const MainAppRouter = () => (
     </Route>
     <Route path="profile" element={<Settings />} />
     <Route path="companies" element={<Companies />} />
+    <Route path="my_companies" element={<MyCompanies />} />
     <Route path="calculator" element={<Calculator />} />
     <Route path="trends" element={<UserTrends />} />
     <Route path="forums" element={<ForumsDiscussions />} />

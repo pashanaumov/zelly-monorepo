@@ -30,18 +30,18 @@ const actions = [
     iconBackground: 'bg-teal-50',
   },
   {
-    icon: ChatIcon,
-    name: 'Forums and discussions',
-    href: '/forums',
-    iconForeground: 'text-sky-700',
-    iconBackground: 'bg-sky-50',
-  },
-  {
     icon: TrendingUpIcon,
     name: 'User trends',
     href: '/trends',
     iconForeground: 'text-yellow-700',
     iconBackground: 'bg-yellow-50',
+  },
+  {
+    icon: ChatIcon,
+    name: 'Forums and discussions',
+    href: '/forums',
+    iconForeground: 'text-sky-700',
+    iconBackground: 'bg-sky-50',
   },
 ];
 
@@ -209,7 +209,7 @@ export const DashboardMain = () => {
                 <UserFollowingCompaniesWidget />
                 <div className="mt-6">
                   <Link
-                    to={'/companies'}
+                    to={'/my_companies'}
                     className="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
                     View all
                   </Link>

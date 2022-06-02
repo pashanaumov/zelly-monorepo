@@ -1,4 +1,3 @@
-/* This example requires Tailwind CSS v2.0+ */
 import { Dialog, Transition } from '@headlessui/react';
 import { ChangeEvent, Fragment, useState } from 'react';
 import { useChangeUserPassword } from '@zelly/core/queries/auth/useChangeUserPassword';
@@ -35,11 +34,27 @@ export function ChangePasswordModal({ isOpen, setOpen }: Props) {
     setOpen(false),
   );
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRepeatPassword, setShowRepeatPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [repeatedPassword, setRepeatedPassword] = useState('');
 
   const [passwordsDontMatchAlert, setPasswordsDontMatchAlert] = useState(false);
+
+  function toggleShowPassword() {
+    setShowPassword((prev) => !prev);
+  }
+
+  function toggleShowRepeatPassword() {
+    setShowRepeatPassword((prev) => !prev);
+  }
+
+  function toggleShowNewPassword() {
+    setShowNewPassword((prev) => !prev);
+  }
 
   function changeCurrentPassword(event: ChangeEvent<HTMLInputElement>) {
     setCurrentPassword(event.target.value);
@@ -91,37 +106,48 @@ export function ChangePasswordModal({ isOpen, setOpen }: Props) {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
               <Dialog.Panel className="relative bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-sm sm:w-full sm:p-6">
-                <div className="mb-6">
+                <div className="mb-6 relative">
                   <label
                     htmlFor="password"
-                    className="block mb-2 text-sm font-medium text-gray-900">
+                    className="block mb-2 text-sm font-medium text-gray-900 relative">
                     Your current password
                   </label>
                   <input
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     id="password"
                     className="focus:ring-sky-500 focus:border-sky-500 flex-grow block w-full min-w-0 rounded-r-md sm:text-sm border-gray-300 rounded"
                     required
                     onChange={changeCurrentPassword}
                   />
+
+                  <button
+                    onClick={toggleShowPassword}
+                    className="bg-gray-300 hover:bg-gray-400 rounded w-14 max-w-14 px-2 py-1 text-sm text-gray-600 cursor-pointer absolute right-2 bottom-1.5">
+                    {showPassword ? 'Hide' : 'Show'}
+                  </button>
                 </div>
-                <div className="mb-6">
+                <div className="mb-6 relative">
                   <label
-                    htmlFor="repeat-password"
+                    htmlFor="new-password"
                     className="block mb-2 text-sm font-medium text-gray-900">
                     New password
                   </label>
                   <div className="mt-1 rounded-md shadow-sm flex">
                     <input
-                      type="password"
-                      id="repeat-password"
+                      type={showNewPassword ? 'text' : 'password'}
+                      id="new-password"
                       className="focus:ring-sky-500 focus:border-sky-500 flex-grow block w-full min-w-0 rounded rounded-r-md sm:text-sm border-gray-300"
                       required
                       onChange={changeNewPassword}
                     />
+                    <button
+                      onClick={toggleShowNewPassword}
+                      className="bg-gray-300 hover:bg-gray-400 rounded w-14 max-w-14 px-2 py-1 text-sm text-gray-600 cursor-pointer absolute right-2 bottom-1.5">
+                      {showNewPassword ? 'Hide' : 'Show'}
+                    </button>
                   </div>
                 </div>
-                <div className="mb-6">
+                <div className="mb-6 relative">
                   <label
                     htmlFor="repeat-new-password"
                     className="block mb-2 text-sm font-medium text-gray-900">
@@ -129,12 +155,17 @@ export function ChangePasswordModal({ isOpen, setOpen }: Props) {
                   </label>
                   <div className="mt-1 rounded-md shadow-sm flex">
                     <input
-                      type="password"
+                      type={showRepeatPassword ? 'text' : 'password'}
                       id="repeat-password"
                       className="focus:ring-sky-500 focus:border-sky-500 flex-grow block w-full min-w-0 rounded rounded-r-md sm:text-sm border-gray-300"
                       required
                       onChange={changeRepeatedPassword}
                     />
+                    <button
+                      onClick={toggleShowRepeatPassword}
+                      className="bg-gray-300 hover:bg-gray-400 rounded w-14 max-w-14 px-2 py-1 text-sm text-gray-600 cursor-pointer absolute right-2 bottom-1.5">
+                      {showRepeatPassword ? 'Hide' : 'Show'}
+                    </button>
                   </div>
                 </div>
                 <button

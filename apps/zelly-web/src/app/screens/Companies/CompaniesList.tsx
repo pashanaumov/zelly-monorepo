@@ -1,12 +1,16 @@
+import React, { FC, useMemo, useState } from 'react';
 import { LoadingPlaceholder } from '@zelly/core/components/LoadingPlaceholder';
 import { useFetchCompanies } from '@zelly/core/queries/useFetchCompanies';
 import { useUserCompanies } from '@zelly/core/queries/useUserCompanies';
 import { CompanyProperties } from '@zelly/core/types/Companies/Company';
-import React, { useMemo, useState } from 'react';
 import { CompanyInformationModal } from './CompanyInformationModal';
 import { AddToFavouritesButton } from './components/AddToFavouritesButton';
 
-export const CompaniesList = () => {
+interface Props {
+  isMyCompanies?: boolean;
+}
+
+export const CompaniesList: FC<Props> = ({ isMyCompanies }) => {
   const [currentCompany, setCurrentCompany] = useState<CompanyProperties>();
   const [isCompanyModalOpen, setIsCompanyModalOpen] = useState<boolean>(false);
 
@@ -32,6 +36,13 @@ export const CompaniesList = () => {
     setIsCompanyModalOpen(true);
   }
 
+  const mainDisplayData = useMemo(
+    () => (isMyCompanies ? favouriteCompanies : data),
+    [data, favouriteCompanies, isMyCompanies],
+  );
+
+  const pageTitle = isMyCompanies ? 'My companies' : 'Companies';
+
   if (isLoading) {
     return <LoadingPlaceholder />;
   }
@@ -41,7 +52,7 @@ export const CompaniesList = () => {
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
-            <h1 className="text-xl font-semibold text-gray-900">Companies</h1>
+            <h1 className="text-xl font-semibold text-gray-900">{pageTitle}</h1>
             <p className="mt-2 text-sm text-gray-700">
               A list of all the companies in the Zelly database including their
               name, industry, country and last CO<sub>2</sub> emission numbers.
@@ -83,8 +94,8 @@ export const CompaniesList = () => {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white">
-                    {data &&
-                      data.map((company: CompanyProperties) => (
+                    {mainDisplayData &&
+                      mainDisplayData.map((company: CompanyProperties) => (
                         <tr key={company.id}>
                           <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
                             <button
