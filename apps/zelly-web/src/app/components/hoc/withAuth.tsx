@@ -30,7 +30,7 @@ export const withAuth =
       if (fetchedToken && isAtMainPage) {
         navigate('/dashboard', { replace: true });
       }
-    }, [fetchedToken, isAtMainPage, location, navigate]);
+    }, [fetchedToken, isAtMainPage]);
 
     useEffect(() => {
       shouldNavigateAway();
