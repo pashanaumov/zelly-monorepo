@@ -3,7 +3,6 @@ import { AppDispatch, RootState } from '@zelly/core/redux/storeWeb';
 import { UserEmail, UserPassword } from '@zelly/core/types/Utility/User';
 import { useFormik } from 'formik';
 import React from 'react';
-import { Oval } from 'react-loader-spinner';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Navigate } from 'react-router-dom';
 import Header from '../Landing/partials/Header';
@@ -53,8 +52,9 @@ export const LoginScreen = () => {
             <div className="pt-32 pb-12 md:pt-40 md:pb-20">
               {/* Page header */}
               <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
+                <h1 className="h1">Welcome back!</h1>
                 <h1 className="h1">
-                  Welcome back.
+                  {'\n'} We appreciate you helping the world!
                 </h1>
               </div>
 
@@ -88,11 +88,6 @@ export const LoginScreen = () => {
                           htmlFor="password">
                           Password
                         </label>
-                        <Link
-                          to="reset-password"
-                          className="text-sm font-medium text-blue-600 hover:underline">
-                          Having trouble signing in?
-                        </Link>
                       </div>
                       <input
                         name="password"

@@ -13,7 +13,7 @@ import Button from '../../components/Common/Button/Button';
 import Header from '../../components/Common/Header';
 import Logo from '../../components/Common/Logo';
 import TextInput from '../../components/Common/TextInput';
-import { countryList } from '../../data/countriesList';
+import { countryList } from '@zelly/core/data/countriesList';
 import { Navigation } from '../../Types';
 import { theme } from '../../ui/theme';
 import { emailValidator, passwordValidator } from '../../ui/utils';

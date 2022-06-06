@@ -1,20 +1,19 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import React, { useState } from 'react';
-import { useFormik } from 'formik';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '@zelly/core/redux/storeWeb';
-import { UserLanguage } from '@zelly/core/types/Utility/User';
+import { countryList } from '@zelly/core/data/countriesList';
 import {
   RegisterUserPayload,
   runRegisterUser,
 } from '@zelly/core/redux/sagas/registerSaga';
-import {
-  SelectOption,
-} from '../../components/common/SelectMenu/SelectMenu';
-import { Link } from 'react-router-dom';
-import Header from '../Landing/partials/Header';
-import Select from "../../components/common/Select/Select";
+import { AppDispatch, RootState } from '@zelly/core/redux/storeWeb';
+import { useFormik } from 'formik';
+import React, { useState } from 'react';
 import { Oval } from 'react-loader-spinner';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Select from '../../components/common/Select/Select';
+import Header from '../Landing/partials/Header';
+import { RegistrationPopover } from './Components/RegistrationPopover';
+import { registrationTexts } from './Components/registrationTexts';
 
 export const RegisterScreen = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -32,6 +31,9 @@ export const RegisterScreen = () => {
   ];
 
   const [currentAgeRange, setCurrentAgeRange] = useState(ageRanges[0]);
+  const [selectedCountry, setSelectedCountry] = useState<string>(
+    countryList[0],
+  );
 
   function onRegister(data: Omit<RegisterUserPayload, 'type'>) {
     dispatch(runRegisterUser(data));
@@ -41,10 +43,13 @@ export const RegisterScreen = () => {
     initialValues: {
       email: '',
       password: '',
-      country: '',
     },
     onSubmit: (_values) => {
-      onRegister({ ..._values, ageRange: currentAgeRange });
+      onRegister({
+        ..._values,
+        country: selectedCountry,
+        ageRange: currentAgeRange,
+      });
     },
   });
 
@@ -90,39 +95,43 @@ export const RegisterScreen = () => {
                       </div>
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-4">
-                      <div className="w-full px-3">
+                      <div className="w-full px-3 relative">
                         <label
                           className="block text-gray-800 text-sm font-medium mb-1"
                           htmlFor="country">
                           Country <span className="text-red-600">*</span>
                         </label>
-                        <input
-                          id="country"
-                          type="text"
-                          className="form-input w-full text-gray-800"
-                          placeholder="Your country"
-                          required
-                          name="country"
-                          value={values.country}
-                          onChange={handleChange}
+                        <Select
+                          options={countryList}
+                          selectedOption={selectedCountry}
+                          handleChange={(event: any) => {
+                            setSelectedCountry(event);
+                          }}
+                        />
+
+                        <RegistrationPopover
+                          mainText={registrationTexts.countryText}
                         />
                       </div>
                     </div>
-                    <div className="flex flex-wrap -mx-3 mb-4">
-                      <div className="w-full px-3">
+                    <div className="flex flex-wrap -mx-3 mb-4 relative">
+                      <div className="w-full px-3 relative">
                         <label
                           className="block text-gray-800 text-sm font-medium mb-1"
                           htmlFor="ageRange">
                           Age range <span className="text-red-600">*</span>
                         </label>
-                            <Select
-                              //className="flex-1"
-                              options={ageRanges}
-                              selectedOption={currentAgeRange}
-                              handleChange={(event: any) => {
-                                setCurrentAgeRange(event);
-                              }}
-                            />
+                        <Select
+                          //className="flex-1"
+                          options={ageRanges}
+                          selectedOption={currentAgeRange}
+                          handleChange={(event: any) => {
+                            setCurrentAgeRange(event);
+                          }}
+                        />
+                        <RegistrationPopover
+                          mainText={registrationTexts.ageText}
+                        />
                       </div>
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-4">
@@ -161,17 +170,6 @@ export const RegisterScreen = () => {
                           )}
                         </button>
                       </div>
-                    </div>
-                    <div className="text-sm text-gray-500 text-center mt-3">
-                      By creating an account, you agree to the{' '}
-                      <a className="underline" href="#0">
-                        terms & conditions
-                      </a>
-                      , and our{' '}
-                      <a className="underline" href="#0">
-                        privacy policy
-                      </a>
-                      .
                     </div>
                   </form>
                   <div className="flex items-center my-6">

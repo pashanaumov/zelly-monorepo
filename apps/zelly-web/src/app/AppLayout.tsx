@@ -1,10 +1,9 @@
 import { Disclosure } from '@headlessui/react';
 import { BellIcon } from '@heroicons/react/outline';
 import { sagaActions } from '@zelly/core/redux/sagas/sagaActions';
-import { RootState } from '@zelly/core/redux/storeWeb';
 import AOS from 'aos';
 import { PropsWithChildren, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Header from './screens/Landing/partials/Header';
 
