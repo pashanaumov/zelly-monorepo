@@ -2,10 +2,10 @@ import {
   CalculatorIcon,
   ChatIcon,
   InformationCircleIcon,
-  TrendingUpIcon,
+  TrendingUpIcon
 } from '@heroicons/react/outline';
-import React from 'react';
 import { useUserInfo } from '@zelly/core/hooks/useUserInfo';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Avatar } from '../../components/common/Avatar/Avatar';
 import { UserFollowingCompaniesWidget } from './components/UserFollowingCompaniesWidget';
@@ -21,6 +21,8 @@ const actions = [
     href: '/companies',
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50',
+    descriptionText:
+      'See how your favourite companies and brands stand against the climate change.',
   },
   {
     icon: CalculatorIcon,
@@ -28,6 +30,8 @@ const actions = [
     href: '/calculator',
     iconForeground: 'text-teal-700',
     iconBackground: 'bg-teal-50',
+    descriptionText:
+      'Calculate your personal carbon footprint. Available in weekly, monthly or annual basis.',
   },
   {
     icon: TrendingUpIcon,
@@ -35,6 +39,8 @@ const actions = [
     href: '/trends',
     iconForeground: 'text-yellow-700',
     iconBackground: 'bg-yellow-50',
+    descriptionText:
+      'Follow carbon footprint trends and keep being informed about your progress.',
   },
   {
     icon: ChatIcon,
@@ -42,6 +48,7 @@ const actions = [
     href: '/forums',
     iconForeground: 'text-sky-700',
     iconBackground: 'bg-sky-50',
+    descriptionText: 'Last news and important topics. Read, think and discuss.',
   },
 ];
 
@@ -171,9 +178,7 @@ export const DashboardMain = () => {
                       </Link>
                     </h3>
                     <p className="mt-2 text-sm text-gray-500">
-                      Doloribus dolores nostrum quia qui natus officia quod et
-                      dolorem. Sit repellendus qui ut at blanditiis et quo et
-                      molestiae.
+                      {action.descriptionText}
                     </p>
                   </div>
                   <span
