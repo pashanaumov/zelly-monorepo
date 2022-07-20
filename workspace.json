@@ -2,6 +2,8 @@
   "version": 2,
   "projects": {
     "core": "libs/core",
+    "zelly-admin": "apps/zelly-admin",
+    "zelly-admin-e2e": "apps/zelly-admin-e2e",
     "zelly-mobile": "apps/zelly-mobile",
     "zelly-mobile-e2e": "apps/zelly-mobile-e2e",
     "zelly-web": "apps/zelly-web",
