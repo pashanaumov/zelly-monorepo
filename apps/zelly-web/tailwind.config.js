@@ -1,5 +1,4 @@
 const { createGlobPatternsForDependencies } = require('@nrwl/react/tailwind');
-const colors = require('tailwindcss/colors');
 
 module.exports = {
   content: [

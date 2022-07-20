@@ -6,6 +6,7 @@ import authReducer from './authSlice';
 import rootSaga from './sagas/rootSaga';
 import userReducer from './userSlice';
 import uiReducer from './ui/uiSlice';
+import { adminReducer } from './ui/adminReducer';
 
 const persistConfig = {
   key: 'root',
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   user: userReducer,
   ui: uiReducer,
+  adminUi: adminReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
