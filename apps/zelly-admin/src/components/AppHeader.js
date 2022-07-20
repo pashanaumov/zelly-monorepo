@@ -20,7 +20,7 @@ import { logo } from '../assets/brand/logo'
 
 const AppHeader = () => {
   const dispatch = useDispatch()
-  const sidebarShow = useSelector((state) => state.sidebarShow)
+  const sidebarShow = useSelector((state) => state.adminUi.sidebarShow)
 
   return (
     <CHeader position="sticky" className="mb-4">
