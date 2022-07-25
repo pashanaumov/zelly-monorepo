@@ -14,4 +14,8 @@ export interface UserResponse {
   token: UserToken;
 }
 
+export interface UserAdminResponse extends UserResponse {
+  isAdmin: true
+}
+
 export type ZellyUser = UserResponse;

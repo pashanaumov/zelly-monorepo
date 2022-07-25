@@ -1,6 +1,6 @@
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import { UserEmail, UserPassword, UserPasswords } from '../../types/Utility/User';
-import { RegisterRequestBody, UserResponse } from '../../types/Auth/LoginResponse';
+import { RegisterRequestBody, UserAdminResponse, UserResponse } from '../../types/Auth/LoginResponse';
 import { apiService } from '../../services/apiService';
 import { zellyUrls } from '../../Urls';
 
@@ -17,6 +17,21 @@ export const authService = {
         setItem(response.token);
       }
       return response;
+    });
+  },
+
+  loginAdmin(email: UserEmail, password: UserPassword) {
+    const { setItem } = useAsyncStorage('user');
+    const { POST } = apiService();
+
+    return POST<UserAdminResponse>(loginUrl, { email, password }).then((response) => {
+      console.log('UserAdminResponse', response);
+
+      if (response.token && response.isAdmin) {
+        setItem(response.token);
+        return response;
+      }
+      return null;
     });
   },
 
