@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { withAuth } from '../components/hoc/withAuth';
-import '../scss/style.scss';
+import '../styles/styles.scss';
 
 const loading = (
   <div className="pt-3 text-center">

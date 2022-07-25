@@ -1,20 +1,27 @@
-import { runFetchData } from '@zelly/core/redux/sagas/authSaga';
-import { RootState, AppDispatch } from '@zelly/core/redux/storeWeb';
+import { runFetchAdminData } from '@zelly/core/redux/sagas/authSaga';
+import { AppDispatch, RootState } from '@zelly/core/redux/storeWeb';
 import { UserEmail, UserPassword } from '@zelly/core/types/Utility/User';
 import { useFormik } from 'formik';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const isAuthenticated = useSelector((state: RootState) => state.auth.authenticated);
 
+  useEffect(() => {
+    console.log('isAuthenticated', isAuthenticated);
+  }, [isAuthenticated]);
+
   const isLoading = useSelector((state: RootState) => state.ui.showLoading);
 
   async function onLogin({ email, password }: { email: UserEmail; password: UserPassword }) {
-    dispatch(runFetchData({ email, password }));
+    dispatch(runFetchAdminData({ email, password }));
   }
+  
+  // @TODO: Fix login for admin
 
   const formik = useFormik({
     initialValues: {
@@ -84,18 +91,7 @@ const Login = () => {
                       />
                     </div>
                   </div>
-                  {/* <div className="flex flex-wrap -mx-3 mb-4">
-                    <div className="w-full px-3">
-                      <div className="flex justify-between">
-                        <label className="flex items-center">
-                          <input type="checkbox" className="form-checkbox" />
-                          <span className="text-gray-600 ml-2">
-                            Keep me signed in
-                          </span>
-                        </label>
-                      </div>
-                    </div>
-                  </div> */}
+
                   <div className="flex flex-wrap -mx-3 mt-6">
                     <div className="w-full px-3">
                       <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full" type="submit">
@@ -123,18 +119,6 @@ const Login = () => {
                     </div>
                   </div>
                 </form>
-                <div className="flex items-center my-6">
-                  <div className="border-t border-gray-300 flex-grow mr-3" aria-hidden="true"></div>
-                  <div className="text-gray-600 italic">Or</div>
-                  <div className="border-t border-gray-300 flex-grow ml-3" aria-hidden="true"></div>
-                </div>
-
-                <div className="text-gray-600 text-center mt-6">
-                  Don’t you have an account?{' '}
-                  <Link to="/register" className="text-blue-600 hover:underline transition duration-150 ease-in-out">
-                    Sign up
-                  </Link>
-                </div>
               </div>
             </div>
           </div>
@@ -144,4 +128,4 @@ const Login = () => {
   );
 };
 
-export default Login
+export default Login;
