@@ -8,6 +8,10 @@ export const zellyUrls = {
   changeEmail: `https://zelly-server.herokuapp.com/auth/user`,
 
   getAllCompanies: __DEV__ ? `http://localhost:3000/companies` : `https://zelly-server.herokuapp.com/companies`,
+  getCompanyById: __DEV__ ? `http://localhost:3000/companies/company` : `https://zelly-server.herokuapp.com/companies/company`,
+
+  addYearlyCalculationToCompany: __DEV__ ? `http://localhost:3000/companies/add_yearly_calculation` : `https://zelly-server.herokuapp.com/companies/add_yearly_calculation`,
+
   connectUserToCompany: 'https://zelly-server.herokuapp.com/user/connectCompany',
   getUserCompanies: `https://zelly-server.herokuapp.com/user/relations`,
   removeCompanyFromUser: `https://zelly-server.herokuapp.com/user/removeCompany`,

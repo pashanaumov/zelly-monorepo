@@ -1,4 +1,5 @@
 export type CompanyId = string;
+export type CompanyName = string;
 
 export interface ClimaticDataParameters {
   CO2ScopeOne: string;
@@ -18,11 +19,11 @@ export interface ClimaticDataParameters {
 
 export interface CompanyProperties {
   id: CompanyId;
-  companyNameEnglish: string;
+  companyNameEnglish: CompanyName;
   companyCountry: string;
   industry: string;
   lastCO2Number: string;
-  companyNameCyrillic?: string;
+  companyNameCyrillic?: CompanyName;
   directCompetitors?: CompanyProperties[];
   climaticDataParameters?: Partial<ClimaticDataParameters>;
   companyBrandList?: string[];

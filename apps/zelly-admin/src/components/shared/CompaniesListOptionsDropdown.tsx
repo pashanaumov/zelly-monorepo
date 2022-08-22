@@ -1,6 +1,8 @@
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
+import { Link } from 'react-router-dom';
+import { CompanyId } from '@zelly/core/types/Companies/Company';
 
 const dropdownOptions = ['Add yearly calculation', 'Add quarterly to yearly'];
 
@@ -10,9 +12,10 @@ function classNames(...classes: Array<string>) {
 
 interface Props {
   companyId: string;
+  companyName: string;
 }
 
-export function CompaniesListOptionsDropdown({ companyId }: Props) {
+export function CompaniesListOptionsDropdown({ companyId, companyName }: Props) {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -35,74 +38,28 @@ export function CompaniesListOptionsDropdown({ companyId }: Props) {
           <div className="py-1 z-50">
             {dropdownOptions.map((dropdownOption) => {
               return (
-                <Menu.Item>
+                <Menu.Item key={dropdownOption}>
                   {({ active }) => (
-                    <a
-                      href="#"
-                      className={classNames(
-                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                        'block px-4 py-2 text-sm'
-                      )}
+                    <Link
+                      to={{
+                        pathname: '/add_yearly_calculation',
+                      }}
+                      state={{ companyId, companyName }}
                     >
-                      {dropdownOption}
-                    </a>
+                      <p
+                        className={classNames(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'block px-4 py-2 text-sm',
+                          'cursor-pointer'
+                        )}
+                      >
+                        {dropdownOption}
+                      </p>
+                    </Link>
                   )}
                 </Menu.Item>
               );
             })}
-            {/* <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="#"
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
-                  )}
-                >
-                  Account settings
-                </a>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="#"
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
-                  )}
-                >
-                  Support
-                </a>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="#"
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
-                  )}
-                >
-                  License
-                </a>
-              )}
-            </Menu.Item>
-            <form method="POST" action="#">
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    type="submit"
-                    className={classNames(
-                      active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                      'block w-full text-left px-4 py-2 text-sm'
-                    )}
-                  >
-                    Sign out
-                  </button>
-                )}
-              </Menu.Item> */}
           </div>
         </Menu.Items>
       </Transition>

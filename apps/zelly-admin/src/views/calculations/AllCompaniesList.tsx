@@ -26,7 +26,11 @@ export const AllCompaniesList = () => {
                     <tr>
                       {tableHeading.map((heading) => {
                         return (
-                          <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                          <th
+                            key={heading}
+                            scope="col"
+                            className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                          >
                             {heading}
                           </th>
                         );
@@ -51,7 +55,10 @@ export const AllCompaniesList = () => {
                             {companyData.lastCO2Number}
                           </td>
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            <CompaniesListOptionsDropdown companyId={companyData.id} />
+                            <CompaniesListOptionsDropdown
+                              companyId={companyData.id}
+                              companyName={companyData.companyNameEnglish}
+                            />
                           </td>
                         </tr>
                       ))}
