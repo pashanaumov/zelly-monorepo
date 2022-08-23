@@ -7,7 +7,7 @@ export function useGetCompanyById() {
     mutateAsync: getCompanyById,
     isLoading,
     error,
-  } = useMutation('getCompanyById', (companyId: CompanyId) => companiesService.getOneById(companyId), {
+  } = useMutation('getCompanyById', (companyId: CompanyId) => companiesService.getOneById({ companyId }), {
     onSuccess: async (data: CompanyProperties) => {
       return data;
     },

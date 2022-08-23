@@ -1,21 +1,28 @@
-import { CompanyId, CompanyPropertiesResponse } from '../types/Companies/Company';
+import { AllCompanyCalculationsResponse, CompanyId, CompanyPropertiesResponse } from '../types/Companies/Company';
 import { CompanyAddYearlyDataPayload } from '../types/FootprintCalculations/FootprintCaclulations';
 import { zellyUrls } from '../Urls';
 import { apiService } from './apiService';
 
+type CompanyIdPayload = {
+  companyId: CompanyId;
+};
+
+const { POST, GET } = apiService();
+
 export const companiesService = {
   async getAll() {
-    const { GET } = apiService();
     return await GET<CompanyPropertiesResponse[]>(zellyUrls.getAllCompanies);
   },
 
-  async getOneById(companyId: CompanyId) {
-    const { POST } = apiService();
+  async getOneById({ companyId }: CompanyIdPayload) {
     return await POST<CompanyPropertiesResponse>(zellyUrls.getCompanyById, { id: companyId });
   },
 
   async addYearlyCalculationToCompany(calculationData: CompanyAddYearlyDataPayload) {
-    const { POST } = apiService();
     return await POST(zellyUrls.addYearlyCalculationToCompany, calculationData);
+  },
+
+  async getAllCalculationsForCompany({ companyId }: CompanyIdPayload) {
+    return await POST<AllCompanyCalculationsResponse>(zellyUrls.getAllCalculationsForCompany, { companyId });
   },
 };

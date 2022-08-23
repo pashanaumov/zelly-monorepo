@@ -31,3 +31,25 @@ export interface CompanyProperties {
 }
 
 export type CompanyPropertiesResponse = CompanyProperties;
+
+export type CompanyQuarterlyCalculationPartial = {
+  year: string;
+  companyName: string;
+  esg: string;
+  id: CompanyId;
+  quarter: string;
+};
+
+export interface AllCompanyCalculations {
+  Methane: string;
+  CO2ScopeThree: string;
+  CO2USD: string;
+  year: string;
+  companyName: CompanyName;
+  CO2ScopeOne: string;
+  id: CompanyId;
+  CO2ScopeTwo: string;
+  calculations: Array<CompanyQuarterlyCalculationPartial>;
+}
+
+export type AllCompanyCalculationsResponse = AllCompanyCalculations[];

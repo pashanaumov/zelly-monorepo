@@ -1,8 +1,8 @@
-import Toast from '@zelly/core/components/Toast';
-import { companiesService } from '@zelly/core/services/companiesService';
-import { CompanyAddYearlyDataPayload } from '@zelly/core/types/FootprintCalculations/FootprintCaclulations';
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
+import Toast from '../../components/Toast';
+import { companiesService } from '../../services/companiesService';
+import { CompanyAddYearlyDataPayload } from '../../types/FootprintCalculations/FootprintCaclulations';
 
 export function useAddYearlyCalculation() {
   const navigate = useNavigate();

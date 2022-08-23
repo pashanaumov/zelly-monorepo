@@ -1,10 +1,12 @@
-import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
+import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { CompanyId } from '@zelly/core/types/Companies/Company';
 
-const dropdownOptions = ['Add yearly calculation', 'Add quarterly to yearly'];
+const dropdownOptions = [
+  { name: 'Add yearly calculation', path: '/add_yearly_calculation' },
+  { name: 'Add quarterly to yearly', path: '/add_quarterly_calculation' },
+];
 
 function classNames(...classes: Array<string>) {
   return classes.filter(Boolean).join(' ');
@@ -38,11 +40,11 @@ export function CompaniesListOptionsDropdown({ companyId, companyName }: Props) 
           <div className="py-1 z-50">
             {dropdownOptions.map((dropdownOption) => {
               return (
-                <Menu.Item key={dropdownOption}>
+                <Menu.Item key={dropdownOption.path}>
                   {({ active }) => (
                     <Link
                       to={{
-                        pathname: '/add_yearly_calculation',
+                        pathname: dropdownOption.path,
                       }}
                       state={{ companyId, companyName }}
                     >
@@ -53,7 +55,7 @@ export function CompaniesListOptionsDropdown({ companyId, companyName }: Props) 
                           'cursor-pointer'
                         )}
                       >
-                        {dropdownOption}
+                        {dropdownOption.name}
                       </p>
                     </Link>
                   )}
