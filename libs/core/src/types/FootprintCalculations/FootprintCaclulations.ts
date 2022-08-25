@@ -23,3 +23,11 @@ export interface CompanyAddYearlyDataPayload {
   yearlyCalculationData: CompanyYearlyCalculationData;
   quarterlyCalculationData: CompanyQuarterlyCalculationData;
 }
+
+export interface CompanyQuarterlyDataPayload {
+  yearlyCalculationId: string;
+  quarterlyCalculationData: {
+    esg: string;
+    quarter: string;
+  };
+}

@@ -1,5 +1,5 @@
 import { AllCompanyCalculationsResponse, CompanyId, CompanyPropertiesResponse } from '../types/Companies/Company';
-import { CompanyAddYearlyDataPayload } from '../types/FootprintCalculations/FootprintCaclulations';
+import { CompanyAddYearlyDataPayload, CompanyQuarterlyDataPayload } from '../types/FootprintCalculations/FootprintCaclulations';
 import { zellyUrls } from '../Urls';
 import { apiService } from './apiService';
 
@@ -24,5 +24,9 @@ export const companiesService = {
 
   async getAllCalculationsForCompany({ companyId }: CompanyIdPayload) {
     return await POST<AllCompanyCalculationsResponse>(zellyUrls.getAllCalculationsForCompany, { companyId });
+  },
+
+  async addQuarterlyToYearlyCalculation(quarterlyData: CompanyQuarterlyDataPayload) {
+    return await POST<AllCompanyCalculationsResponse[]>(zellyUrls.addQuarterlyCalculationToYearly, { ...quarterlyData });
   },
 };

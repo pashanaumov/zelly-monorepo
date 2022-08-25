@@ -1,5 +1,5 @@
-import { companiesService } from '@zelly/core/services/companiesService';
-import { CompanyId } from '@zelly/core/types/Companies/Company';
+import { companiesService } from '../../services/companiesService';
+import { CompanyId } from '../../types/Companies/Company';
 import { useMutation } from 'react-query';
 import Toast from '../../components/Toast';
 

@@ -1,19 +1,6 @@
-import React from 'react';
+import { cilCompass, cilDrop, cilPencil, cilSpeedometer } from '@coreui/icons';
 import CIcon from '@coreui/icons-react';
-import {
-  cilBell,
-  cilCalculator,
-  cilChartPie,
-  cilCursor,
-  cilDrop,
-  cilNotes,
-  cilPencil,
-  cilPuzzle,
-  cilSpeedometer,
-  cilStar,
-  cilCompass
-} from '@coreui/icons';
-import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react';
+import { CNavItem } from '@coreui/react';
 
 const _nav = [
   {
@@ -28,16 +15,23 @@ const _nav = [
   },
   {
     component: CNavItem,
+    name: 'All companies',
+    to: '/all_companies',
+    icon: <CIcon icon={cilCompass} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
     name: 'Add yearly calculation',
     to: '/add_yearly_calculation',
     icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
-    name: 'All companies',
-    to: '/all_companies',
-    icon: <CIcon icon={cilCompass} customClassName="nav-icon" />,
-  }
+    name: 'Add quarterly calculation',
+    to: '/add_quarterly_calculation',
+    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+  },
+
   // {
   //   component: CNavTitle,
   //   name: 'Theme',

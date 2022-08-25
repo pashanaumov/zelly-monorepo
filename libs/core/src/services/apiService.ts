@@ -1,7 +1,6 @@
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import axios, { AxiosRequestHeaders } from 'axios';
 import { jwtAuthInterceptor } from '../interceptors/jwtAuthInterceptor';
-import { GenericObject } from '../types/Utility/Helpers';
 import { FetchMethod, HttpMethod, RequestBody, Url } from '../types/Utility/Http';
 
 jwtAuthInterceptor();
