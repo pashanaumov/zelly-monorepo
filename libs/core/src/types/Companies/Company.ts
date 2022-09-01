@@ -27,7 +27,8 @@ export interface CompanyProperties {
   directCompetitors?: CompanyProperties[];
   climaticDataParameters?: Partial<ClimaticDataParameters>;
   companyBrandList?: string[];
-  quasiESGOwn?: string;
+  quasiESGOwner?: string;
+  climateAgendaWebLink?: string;
 }
 
 export type CompanyPropertiesResponse = CompanyProperties;
@@ -53,3 +54,11 @@ export interface AllCompanyCalculations {
 }
 
 export type AllCompanyCalculationsResponse = AllCompanyCalculations[];
+
+export interface CreateCompanyPayload {
+  companyNameEnglish: string;
+  industry: string;
+  quasiESGOwner: string;
+  lastCO2Number: string;
+  climateAgendaWebLink: string;
+}

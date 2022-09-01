@@ -7,6 +7,10 @@ export const zellyUrls = {
   changePassword: `https://zelly-server.herokuapp.com/auth/change_password`,
   changeEmail: `https://zelly-server.herokuapp.com/auth/user`,
 
+  createCompany: __DEV__ ? `http://localhost:3000/companies/create` : `https://zelly-server.herokuapp.com/companies/create`,
+
+  editCompany: __DEV__ ? `http://localhost:3000/companies/edit` : `https://zelly-server.herokuapp.com/companies/edit`,
+
   getAllCompanies: __DEV__ ? `http://localhost:3000/companies` : `https://zelly-server.herokuapp.com/companies`,
   getCompanyById: __DEV__ ? `http://localhost:3000/companies/company` : `https://zelly-server.herokuapp.com/companies/company`,
 

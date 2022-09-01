@@ -1,4 +1,4 @@
-import { AllCompanyCalculationsResponse, CompanyId, CompanyPropertiesResponse } from '../types/Companies/Company';
+import { AllCompanyCalculationsResponse, CompanyId, CompanyProperties, CompanyPropertiesResponse, CreateCompanyPayload } from '../types/Companies/Company';
 import { CompanyAddYearlyDataPayload, CompanyQuarterlyDataPayload } from '../types/FootprintCalculations/FootprintCaclulations';
 import { zellyUrls } from '../Urls';
 import { apiService } from './apiService';
@@ -7,9 +7,17 @@ type CompanyIdPayload = {
   companyId: CompanyId;
 };
 
-const { POST, GET } = apiService();
+const { POST, GET, PUT } = apiService();
 
 export const companiesService = {
+  async createCompany(payload: CreateCompanyPayload) {
+    return await POST<CompanyProperties>(zellyUrls.createCompany, { ...payload });
+  },
+
+  async editCompany(payload: Partial<CreateCompanyPayload>) {
+    return await PUT<CompanyProperties>(zellyUrls.editCompany, { ...payload });
+  },
+
   async getAll() {
     return await GET<CompanyPropertiesResponse[]>(zellyUrls.getAllCompanies);
   },

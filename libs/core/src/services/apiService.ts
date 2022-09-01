@@ -50,6 +50,8 @@ export function apiService() {
   }
 
   function PUT<T, R = Record<string, any>>(route: Url, body: RequestBody<R>, headers: AxiosRequestHeaders | null = null) {
+    console.log('PUT BODY', body);
+    
     return fetchData<T>(route, HttpMethod.PUT, body, headers);
   }
 
