@@ -22,8 +22,6 @@ export const authService = {
     const { POST } = apiService();
 
     return POST<UserAdminResponse>(zellyUrls.loginUrl, { email, password }).then((response) => {
-      console.log('UserAdminResponse', response);
-
       if (response.token && response.isAdmin) {
         setItem(response.token);
         return response;
