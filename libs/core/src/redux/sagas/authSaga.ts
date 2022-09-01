@@ -43,6 +43,7 @@ function* loginUser(payload: LoginUserPayload) {
 function* loginAdminUser(payload: LoginUserPayload) {
   const { email, password } = payload;
   const { loginAdmin } = authService;
+
   yield put(toggleLoading(true));
   try {
     const user: UserAdminResponse = yield call(() => loginAdmin(email, password));

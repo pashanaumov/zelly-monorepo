@@ -4,15 +4,12 @@ import { RegisterRequestBody, UserAdminResponse, UserResponse } from '../../type
 import { apiService } from '../../services/apiService';
 import { zellyUrls } from '../../Urls';
 
-const loginUrl = `https://zelly-server.herokuapp.com/auth/login`;
-const registerUrl = `https://zelly-server.herokuapp.com/auth/register`;
-
 export const authService = {
   login(email: UserEmail, password: UserPassword) {
     const { setItem } = useAsyncStorage('user');
     const { POST } = apiService();
 
-    return POST<UserResponse>(loginUrl, { email, password }).then((response) => {
+    return POST<UserResponse>(zellyUrls.loginUrl, { email, password }).then((response) => {
       if (response.token) {
         setItem(response.token);
       }
@@ -24,7 +21,7 @@ export const authService = {
     const { setItem } = useAsyncStorage('user');
     const { POST } = apiService();
 
-    return POST<UserAdminResponse>(loginUrl, { email, password }).then((response) => {
+    return POST<UserAdminResponse>(zellyUrls.loginUrl, { email, password }).then((response) => {
       console.log('UserAdminResponse', response);
 
       if (response.token && response.isAdmin) {
@@ -45,7 +42,7 @@ export const authService = {
     const { setItem } = useAsyncStorage('user');
     const { POST } = apiService();
 
-    return POST<UserResponse>(registerUrl, {
+    return POST<UserResponse>(zellyUrls.registerUrl, {
       email,
       password,
       country,

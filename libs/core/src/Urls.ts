@@ -1,11 +1,11 @@
 const __DEV__ = process.env['NODE_ENV'] === 'development';
 
 export const zellyUrls = {
-  loginUrl: `https://zelly-server.herokuapp.com/auth/login`,
-  registerUrl: `https://zelly-server.herokuapp.com/auth/register`,
+  loginUrl: __DEV__ ? 'http://localhost:3000/auth/login' : `https://zelly-server.herokuapp.com/auth/login`,
+  registerUrl: __DEV__ ? 'http://localhost:3000/auth/register' : `https://zelly-server.herokuapp.com/auth/register`,
 
-  changePassword: `https://zelly-server.herokuapp.com/auth/change_password`,
-  changeEmail: `https://zelly-server.herokuapp.com/auth/user`,
+  changePassword: __DEV__ ? 'http://localhost:3000/auth/change_password' : `https://zelly-server.herokuapp.com/auth/change_password`,
+  changeEmail: __DEV__ ? 'http://localhost:3000//auth/user' : `https://zelly-server.herokuapp.com/auth/user`,
 
   createCompany: __DEV__ ? `http://localhost:3000/companies/create` : `https://zelly-server.herokuapp.com/companies/create`,
 
