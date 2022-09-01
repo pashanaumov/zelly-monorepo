@@ -2,7 +2,6 @@ import { runFetchAdminData } from '@zelly/core/redux/sagas/authSaga';
 import { AppDispatch, RootState } from '@zelly/core/redux/storeWeb';
 import { UserEmail, UserPassword } from '@zelly/core/types/Utility/User';
 import { useFormik } from 'formik';
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
@@ -10,17 +9,12 @@ const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const isAuthenticated = useSelector((state: RootState) => state.auth.authenticated);
-
-  useEffect(() => {
-    console.log('isAuthenticated', isAuthenticated);
-  }, [isAuthenticated]);
-
   const isLoading = useSelector((state: RootState) => state.ui.showLoading);
 
   async function onLogin({ email, password }: { email: UserEmail; password: UserPassword }) {
     dispatch(runFetchAdminData({ email, password }));
   }
-  
+
   // @TODO: Fix login for admin
 
   const formik = useFormik({
@@ -48,7 +42,7 @@ const Login = () => {
             <div className="pt-32 pb-12 md:pt-40 md:pb-20">
               {/* Page header */}
               <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-                <h1 className="h1">Welcome back!</h1>
+                <h1 className="h1">Welcome back Admin!</h1>
                 <h1 className="h1">{'\n'} We appreciate you helping the world!</h1>
               </div>
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   CAvatar,
   CBadge,
@@ -8,7 +8,7 @@ import {
   CDropdownItem,
   CDropdownMenu,
   CDropdownToggle,
-} from '@coreui/react'
+} from '@coreui/react';
 import {
   cilBell,
   cilCreditCard,
@@ -19,12 +19,19 @@ import {
   cilSettings,
   cilTask,
   cilUser,
-} from '@coreui/icons'
-import CIcon from '@coreui/icons-react'
+} from '@coreui/icons';
+import CIcon from '@coreui/icons-react';
+import { useDispatch } from 'react-redux';
+import { runLogoutUser } from '@zelly/core/redux/sagas/authSaga';
 
-import avatar8 from './../../assets/images/avatars/8.jpg'
+import avatar8 from './../../assets/images/avatars/8.jpg';
 
 const AppHeaderDropdown = () => {
+  const dispatch = useDispatch();
+
+  function logoutUser() {
+    dispatch(runLogoutUser());
+  }
   return (
     <CDropdown variant="nav-item">
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
@@ -84,13 +91,13 @@ const AppHeaderDropdown = () => {
           </CBadge>
         </CDropdownItem>
         <CDropdownDivider />
-        <CDropdownItem href="#">
+        <CDropdownItem href="#" onClick={logoutUser}>
           <CIcon icon={cilLockLocked} className="me-2" />
           Lock Account
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>
-  )
-}
+  );
+};
 
-export default AppHeaderDropdown
+export default AppHeaderDropdown;
